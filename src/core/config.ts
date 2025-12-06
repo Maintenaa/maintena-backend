@@ -10,6 +10,9 @@ export class Config {
   static DB_PASSWORD: string = process.env.DB_PASSWORD || "";
   static DB_NAME: string = process.env.DB_NAME || "";
 
+  //jwt
+  static JWT_SECRET_KEY: string = process.env.JWT_SECRET_KEY || "";
+
   static get isDevelopment(): boolean {
     return this.APP_ENV == "development";
   }

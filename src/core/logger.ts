@@ -7,7 +7,7 @@ class Logger {
     console.log(`[${time}]`.cyan, ...message);
   }
 
-  dev(...message: string[]) {
+  info(...message: string[]) {
     this.log(...message.map((m) => m.blue));
   }
 
