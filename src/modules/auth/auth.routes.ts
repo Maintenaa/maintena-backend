@@ -7,19 +7,30 @@ export default function createAuthRoute() {
     prefix: "/auth",
   })
 
-    .get("/", async ({ user }: any) => {
-      if (!user) {
-        throw createError("Unauthorized", 401);
-      }
+    .get(
+      "/",
+      async ({ user }: any) => {
+        if (!user) {
+          throw createError("Unauthorized", 401);
+        }
 
-      return {
-        profile: user,
-      };
-    })
+        return {
+          profile: user,
+        };
+      },
+      {
+        headers: t.Object({
+          Authorization: t.String({
+            description: "Bearer <token>",
+            default: "",
+          }),
+        }),
+      }
+    )
 
     .post(
       "/login",
-      async ({ body, cookie, store }) => {
+      async ({ body, cookie }) => {
         const { email, password } = body;
         const result = await login(email, password);
 
