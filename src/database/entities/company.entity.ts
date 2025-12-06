@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import type { Relation } from "typeorm";
 import { Employee } from "./employee.entity";
 import { Location } from "./location.entity";
 import { Asset } from "./asset.entity";
@@ -24,20 +25,20 @@ export class Company extends BaseEntity {
   updated_at: Date;
 
   @OneToMany(() => Employee, (employee) => employee.company)
-  employees: Employee[];
+  employees: Relation<Employee[]>;
 
   @OneToMany(() => Location, (location) => location.company)
-  locations: Location[];
+  locations: Relation<Location[]>;
 
   @OneToMany(() => Asset, (asset) => asset.company)
-  assets: Asset[];
+  assets: Relation<Asset[]>;
 
   @OneToMany(() => Part, (part) => part.company)
-  parts: Part[];
+  parts: Relation<Part[]>;
 
   @OneToMany(() => WorkOrder, (workOrder) => workOrder.company)
-  workOrders: WorkOrder[];
+  workOrders: Relation<WorkOrder[]>;
 
   @OneToMany(() => PreventiveMaintenance, (pm) => pm.company)
-  preventiveMaintenances: PreventiveMaintenance[];
+  preventiveMaintenances: Relation<PreventiveMaintenance[]>;
 }

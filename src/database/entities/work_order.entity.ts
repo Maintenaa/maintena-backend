@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, JoinColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import type { Relation } from "typeorm";
 import { Company } from "./company.entity";
 import { Asset } from "./asset.entity";
 import { User } from "./user.entity";
@@ -49,17 +50,17 @@ export class WorkOrder extends BaseEntity {
 
   @ManyToOne(() => Company, (company) => company.workOrders)
   @JoinColumn({ name: "company_id" })
-  company: Company;
+  company: Relation<Company>;
 
   @ManyToOne(() => Asset)
   @JoinColumn({ name: "asset_id", referencedColumnName: "kode" })
-  asset: Asset;
+  asset: Relation<Asset>;
 
   @ManyToOne(() => User)
   @JoinColumn({ name: "created_by" })
-  creator: User;
+  creator: Relation<User>;
 
   @ManyToOne(() => User)
   @JoinColumn({ name: "assigned_to" })
-  assignee: User;
+  assignee: Relation<User>;
 }

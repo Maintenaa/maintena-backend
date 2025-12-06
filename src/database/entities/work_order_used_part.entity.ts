@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, JoinColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import type { Relation } from "typeorm";
 import { WorkOrder } from "./work_order.entity";
 import { Part } from "./part.entity";
 
@@ -21,11 +22,11 @@ export class WorkOrderUsedPart extends BaseEntity {
 
   @ManyToOne(() => WorkOrder)
   @JoinColumn({ name: "work_order_id" })
-  workOrder: WorkOrder;
+  workOrder: Relation<WorkOrder>;
 
   @ManyToOne(() => Part)
   @JoinColumn({ name: "part_id" })
-  part: Part;
+  part: Relation<Part>;
   @CreateDateColumn()
   created_at: Date;
 

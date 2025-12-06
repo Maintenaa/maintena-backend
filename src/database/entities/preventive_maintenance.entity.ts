@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, JoinColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import type { Relation } from "typeorm";
 import { Company } from "./company.entity";
 import { Asset } from "./asset.entity";
 
@@ -27,11 +28,11 @@ export class PreventiveMaintenance extends BaseEntity {
 
   @ManyToOne(() => Company, (company) => company.preventiveMaintenances)
   @JoinColumn({ name: "company_id" })
-  company: Company;
+  company: Relation<Company>;
 
   @ManyToOne(() => Asset)
   @JoinColumn({ name: "asset_id", referencedColumnName: "kode" })
-  asset: Asset;
+  asset: Relation<Asset>;
   @CreateDateColumn()
   created_at: Date;
 

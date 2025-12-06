@@ -1,4 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, JoinColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BaseEntity,
+  ManyToOne,
+  JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  type Relation,
+} from "typeorm";
 import { User } from "./user.entity";
 import { Company } from "./company.entity";
 
@@ -18,11 +28,12 @@ export class Employee extends BaseEntity {
 
   @ManyToOne(() => User)
   @JoinColumn({ name: "user_id" })
-  user: User;
+  user: Relation<User>;
 
-  @ManyToOne(() => Company, (company) => company.employees)
+  @ManyToOne(() => Company)
   @JoinColumn({ name: "company_id" })
-  company: Company;
+  company: Relation<Company>;
+
   @CreateDateColumn()
   created_at: Date;
 

@@ -1,6 +1,7 @@
 export class Config {
   // application
   static APP_ENV: string = process.env.APP_ENV || "development";
+  static APP_PORT: number = (process.env.APP_PORT as any) || 5000;
 
   // database
   static DB_HOST: string = process.env.DB_HOST || "localhost";

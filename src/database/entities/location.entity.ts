@@ -1,4 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, JoinColumn, OneToMany, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BaseEntity,
+  ManyToOne,
+  JoinColumn,
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from "typeorm";
+import type { Relation } from "typeorm";
 import { Company } from "./company.entity";
 
 @Entity({ name: "locations" })
@@ -17,14 +28,16 @@ export class Location extends BaseEntity {
 
   @ManyToOne(() => Company, (company) => company.locations)
   @JoinColumn({ name: "company_id" })
-  company: Company;
+  company: Relation<Company>;
 
-  @ManyToOne(() => Location, (location) => location.children, { nullable: true })
+  @ManyToOne(() => Location, (location) => location.children, {
+    nullable: true,
+  })
   @JoinColumn({ name: "parent_id" })
-  parent: Location;
+  parent: Relation<Location>;
 
   @OneToMany(() => Location, (location) => location.parent)
-  children: Location[];
+  children: Relation<Location[]>;
   @CreateDateColumn()
   created_at: Date;
 

@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import type { Relation } from "typeorm";
 import { Asset } from "./asset.entity";
 
 @Entity({ name: "asset_categories" })
@@ -16,7 +17,7 @@ export class AssetCategory extends BaseEntity {
   is_active: boolean;
 
   @OneToMany(() => Asset, (asset) => asset.category)
-  assets: Asset[];
+  assets: Relation<Asset[]>;
   @CreateDateColumn()
   created_at: Date;
 

@@ -1,4 +1,5 @@
 import { Entity, Column, BaseEntity, ManyToOne, JoinColumn, PrimaryColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import type { Relation } from "typeorm";
 import { Company } from "./company.entity";
 import { AssetCategory } from "./asset_category.entity";
 import { Location } from "./location.entity";
@@ -22,15 +23,15 @@ export class Asset extends BaseEntity {
 
   @ManyToOne(() => Company, (company) => company.assets)
   @JoinColumn({ name: "company_id" })
-  company: Company;
+  company: Relation<Company>;
 
   @ManyToOne(() => AssetCategory, (category) => category.assets)
   @JoinColumn({ name: "category_id" })
-  category: AssetCategory;
+  category: Relation<AssetCategory>;
 
   @ManyToOne(() => Location)
   @JoinColumn({ name: "location_id" })
-  location: Location;
+  location: Relation<Location>;
   @CreateDateColumn()
   created_at: Date;
 
