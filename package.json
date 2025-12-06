@@ -8,6 +8,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@elysiajs/cors": "^1.4.0",
     "@elysiajs/openapi": "^1.4.11",
     "bcrypt": "^6.0.0",
     "colors": "^1.4.0",

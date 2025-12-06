@@ -53,3 +53,7 @@ export async function login(email: string, password: string) {
     refresh_token,
   };
 }
+
+export async function getProfile(id: number) {
+  return await userRepo.findOneBy({ id });
+}

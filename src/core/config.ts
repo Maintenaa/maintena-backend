@@ -13,6 +13,9 @@ export class Config {
   //jwt
   static JWT_SECRET_KEY: string = process.env.JWT_SECRET_KEY || "";
 
+  // client
+  static CLIENT_URL: string = process.env.CLIENT_URL || "*";
+
   static get isDevelopment(): boolean {
     return this.APP_ENV == "development";
   }
