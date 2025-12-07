@@ -5,7 +5,10 @@ import { Config } from "../core";
 import createCheckHealthRoute from "../modules/check-health/check-health.route";
 import createAuthRoute from "../modules/auth/auth.route";
 import cors from "@elysiajs/cors";
-import { CommonMiddleware } from "../modules/common/common.middleware";
+import {
+  CommonMiddleware,
+  LoggerMiddleware,
+} from "../modules/common/common.middleware";
 import createProfileRoute from "../modules/profile/profile.route";
 
 export default function buildElysiaServer() {
@@ -23,6 +26,7 @@ export default function buildElysiaServer() {
 
       // middleware
       .use(CommonMiddleware())
+      .use(LoggerMiddleware())
 
       // routes
       .use(createCheckHealthRoute())

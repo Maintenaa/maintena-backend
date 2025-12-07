@@ -33,3 +33,34 @@ export function CommonMiddleware() {
     }
   });
 }
+
+export function LoggerMiddleware() {
+  let oldTime: Date;
+
+  return new Elysia()
+    .onBeforeHandle({ as: "global" }, ({ route, request: { method } }) => {
+      oldTime = new Date();
+      console.log("");
+      logger.info(`🚀 [${method}] ${route} started`);
+    })
+    .onAfterResponse({ as: "global" }, (req) => {
+      const {
+        route,
+        request: { method },
+        responseValue,
+      } = req;
+
+      const time = new Date().getTime() - oldTime.getTime();
+      const status = (responseValue as any)?.status || 200;
+
+      const message = `🚀 [${method}] ${route} completed in ${time}ms with status ${status}`;
+
+      if (status >= 500) {
+        logger.error(message);
+      } else if (status >= 400) {
+        logger.warn(message);
+      } else {
+        logger.success(message);
+      }
+    });
+}

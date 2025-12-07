@@ -3,7 +3,7 @@ import moment from "moment";
 
 class Logger {
   log(...message: string[]) {
-    const time = moment().format("YYYY-MM-DD HH:mm");
+    const time = moment().format("YYYY-MM-DD HH:mm:ss");
     console.log(`[${time}]`.cyan, ...message);
   }
 

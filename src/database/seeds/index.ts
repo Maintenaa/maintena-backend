@@ -4,30 +4,36 @@ import type { BaseSeeder } from "./base.seeder";
 import { UserSeeder } from "./user.seeder";
 
 async function main() {
-  logger.info("Mulai menjalankan seed");
+  logger.success("🌱 Start seeding database");
 
   try {
     await dataSource.initialize();
   } catch (err) {
-    logger.error("Gagal melakukan seed");
+    logger.error("Failed to connect database");
     return;
   }
 
   const seeders: BaseSeeder[] = [new UserSeeder()];
 
   for (const seeder of seeders) {
+    let oldTime = new Date().getTime();
+
+    console.log("");
     logger.info(`Running seeder ${seeder.name}`);
 
     try {
       await seeder.run();
-      logger.success(`Seeder ${seeder.name} berhasil dijalankan`);
+
+      const time = new Date().getTime() - oldTime;
+      logger.info(`Seeder ${seeder.name} completed in ${time}ms`);
     } catch (err) {
-      logger.error(`Gagal menjalankan seeder ${seeder.name}\n`);
+      logger.error(`Failed to run seeder ${seeder.name}\n`);
       console.log(err);
     }
   }
 
-  logger.success("Semua seed berhasil dijalankan");
+  console.log("");
+  logger.success("💉 All seeders completed");
 
   process.exit(0);
 }
