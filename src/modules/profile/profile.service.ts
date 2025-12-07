@@ -8,7 +8,14 @@ import { updateProfileSchema } from "./profile.schema";
 const userRepo = dataSource.getRepository(User);
 
 export async function getProfile(id: number) {
-  return await userRepo.findOneBy({ id });
+  return await userRepo.findOne({
+    where: { id },
+    relations: {
+      employee: {
+        company: true,
+      },
+    },
+  });
 }
 
 export async function updateProfile(body: Static<typeof updateProfileSchema>) {

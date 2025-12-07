@@ -6,6 +6,8 @@ import {
   OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from "typeorm";
 import type { Relation } from "typeorm";
 import { Employee } from "./employee.entity";
@@ -14,6 +16,7 @@ import { Asset } from "./asset.entity";
 import { Part } from "./part.entity";
 import { WorkOrder } from "./work_order.entity";
 import { PreventiveMaintenance } from "./preventive_maintenance.entity";
+import { User } from "./user.entity";
 
 @Entity({ name: "companies" })
 export class Company extends BaseEntity {
@@ -26,7 +29,7 @@ export class Company extends BaseEntity {
   @Column({ type: "json" })
   employees_count_range: number[];
 
-  @Column({ type: "varchar" })
+  @Column({ type: "varchar", unique: true })
   email: string;
 
   @Column({ type: "varchar" })
@@ -37,6 +40,10 @@ export class Company extends BaseEntity {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: "user_id" })
+  owner: Relation<User>;
 
   @OneToMany(() => Employee, (employee) => employee.company)
   employees: Relation<Employee[]>;

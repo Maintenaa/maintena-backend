@@ -8,6 +8,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   type Relation,
+  OneToOne,
 } from "typeorm";
 import { User } from "./user.entity";
 import { Company } from "./company.entity";
@@ -17,16 +18,16 @@ export class Employee extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  user_id: number;
+  @Column({ type: "varchar" })
+  role: string;
 
-  @Column()
-  company_id: number;
+  @Column({ type: "boolean", nullable: false, default: false })
+  is_owner: boolean;
 
-  @Column({ type: "enum", enum: ["admin", "supervisor", "technician", "user"] })
-  role: "admin" | "supervisor" | "technician" | "user";
+  @Column({ type: "boolean", nullable: true, default: true })
+  is_active?: boolean;
 
-  @ManyToOne(() => User)
+  @OneToOne(() => User, (e) => e.employee)
   @JoinColumn({ name: "user_id" })
   user: Relation<User>;
 

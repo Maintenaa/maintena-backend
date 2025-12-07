@@ -2,10 +2,15 @@ import { verify } from "jsonwebtoken";
 import { Config, logger } from "../../core";
 import Elysia from "elysia";
 import { getProfile } from "../profile/profile.service";
+import { TypeORMError } from "typeorm";
 
 export function CommonMiddleware() {
-  return new Elysia().derive({ as: "global" }, async ({ headers }) => {
-    const authorization = headers["authorization"];
+  return new Elysia().derive({ as: "global" }, async ({ headers, cookie }) => {
+    let authorization = headers["authorization"];
+
+    if (!authorization?.trim() && Config.isDevelopment) {
+      authorization = `Bearer ${cookie.refresh_token.value}`;
+    }
 
     if (!authorization) {
       return;
@@ -41,19 +46,19 @@ export function LoggerMiddleware() {
     .onBeforeHandle({ as: "global" }, ({ route, request: { method } }) => {
       oldTime = new Date();
       console.log("");
-      logger.info(`🚀 [${method}] ${route} started`);
+      logger.info(`💧 [${method}] ${route} started`);
     })
     .onAfterResponse({ as: "global" }, (req) => {
       const {
         route,
         request: { method },
-        responseValue,
+        set,
       } = req;
 
       const time = new Date().getTime() - oldTime.getTime();
-      const status = (responseValue as any)?.status || 200;
+      const status = (set.status as number) || 200;
 
-      const message = `🚀 [${method}] ${route} completed in ${time}ms with status ${status}`;
+      const message = `🌊 [${method}] ${route} completed in ${time}ms with status ${status}`;
 
       if (status >= 500) {
         logger.error(message);
@@ -63,4 +68,24 @@ export function LoggerMiddleware() {
         logger.success(message);
       }
     });
+}
+
+export function ErrorMiddleware() {
+  return new Elysia().onError(
+    { as: "global" },
+    ({ error, set: { status: code } }) => {
+      console.log(error);
+
+      if (error instanceof TypeORMError) {
+        return Response.json(
+          {
+            message: error.message,
+          },
+          {
+            status: (code as number) || 500,
+          }
+        );
+      }
+    }
+  );
 }

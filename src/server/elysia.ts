@@ -2,14 +2,17 @@ import openapi, { fromTypes } from "@elysiajs/openapi";
 import Elysia from "elysia";
 import { Config } from "../core";
 
-import createCheckHealthRoute from "../modules/check-health/check-health.route";
-import createAuthRoute from "../modules/auth/auth.route";
 import cors from "@elysiajs/cors";
 import {
   CommonMiddleware,
+  ErrorMiddleware,
   LoggerMiddleware,
 } from "../modules/common/common.middleware";
+
+import createCheckHealthRoute from "../modules/check-health/check-health.route";
+import createAuthRoute from "../modules/auth/auth.route";
 import createProfileRoute from "../modules/profile/profile.route";
+import createCompanyRoute from "../modules/company/company.route";
 
 export default function buildElysiaServer() {
   return (
@@ -27,11 +30,13 @@ export default function buildElysiaServer() {
       // middleware
       .use(CommonMiddleware())
       .use(LoggerMiddleware())
+      .use(ErrorMiddleware())
 
       // routes
       .use(createCheckHealthRoute())
       .use(createAuthRoute())
       .use(createProfileRoute())
+      .use(createCompanyRoute())
 
       // run server
       .listen(Config.APP_PORT)

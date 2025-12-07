@@ -7,9 +7,12 @@ import {
   UpdateDateColumn,
   BeforeInsert,
   BeforeUpdate,
+  OneToOne,
+  type Relation,
 } from "typeorm";
 import bcrypt from "bcrypt";
 import { authSalt } from "../../modules/auth/auth.constant";
+import { Employee } from "./employee.entity";
 
 @Entity({ name: "users" })
 export class User extends BaseEntity {
@@ -45,4 +48,7 @@ export class User extends BaseEntity {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToOne(() => Employee, (e) => e.user)
+  employee?: Relation<Employee>;
 }

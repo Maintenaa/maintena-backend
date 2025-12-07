@@ -1,6 +1,7 @@
 import Elysia from "elysia";
 import { login, register } from "./auth.service";
 import { loginSchema, registerSchema } from "./auth.schema";
+import { Config } from "../../core";
 
 export default function createAuthRoute() {
   const app = new Elysia({
@@ -10,15 +11,12 @@ export default function createAuthRoute() {
     .post(
       "/login",
       async ({ body, cookie }) => {
-        const result = await login(body);
+        const { refresh_token, ...result } = await login(body);
 
-        cookie.refresh_token.value = result.refresh_token;
+        cookie.refresh_token.value = refresh_token;
         cookie.refresh_token.httpOnly = true;
 
-        return {
-          ...result,
-          refresh_token: undefined,
-        };
+        return result;
       },
       {
         body: loginSchema,
@@ -28,15 +26,12 @@ export default function createAuthRoute() {
     .post(
       "/register",
       async ({ body, cookie }) => {
-        const result = await register(body);
+        const { refresh_token, ...result } = await register(body);
 
-        cookie.refresh_token.value = result.refresh_token;
+        cookie.refresh_token.value = refresh_token;
         cookie.refresh_token.httpOnly = true;
 
-        return {
-          ...result,
-          refresh_token: undefined,
-        };
+        return result;
       },
       {
         body: registerSchema,
