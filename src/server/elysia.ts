@@ -13,6 +13,7 @@ import createCheckHealthRoute from "../modules/check-health/check-health.route";
 import createAuthRoute from "../modules/auth/auth.route";
 import createProfileRoute from "../modules/profile/profile.route";
 import createCompanyRoute from "../modules/company/company.route";
+import createEmployeeRoute from "../modules/employee/employee.route";
 
 export default function buildElysiaServer() {
   return (
@@ -37,6 +38,7 @@ export default function buildElysiaServer() {
       .use(createAuthRoute())
       .use(createProfileRoute())
       .use(createCompanyRoute())
+      .use(createEmployeeRoute())
 
       // run server
       .listen(Config.APP_PORT)

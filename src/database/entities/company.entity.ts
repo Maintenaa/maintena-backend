@@ -9,7 +9,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from "typeorm";
-import type { Relation } from "typeorm";
+import { BeforeInsert, type Relation } from "typeorm";
 import { Employee } from "./employee.entity";
 import { Location } from "./location.entity";
 import { Asset } from "./asset.entity";
@@ -18,10 +18,20 @@ import { WorkOrder } from "./work_order.entity";
 import { PreventiveMaintenance } from "./preventive_maintenance.entity";
 import { User } from "./user.entity";
 
+import { v4 } from "uuid";
+
 @Entity({ name: "companies" })
 export class Company extends BaseEntity {
+  @BeforeInsert()
+  generateKode() {
+    this.kode = v4();
+  }
+
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column({ type: "uuid" })
+  kode: string;
 
   @Column({ type: "varchar", length: 255 })
   name: string;

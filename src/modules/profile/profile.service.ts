@@ -18,7 +18,9 @@ export async function getProfile(id: number) {
   });
 }
 
-export async function updateProfile(body: Static<typeof updateProfileSchema>) {
+export async function updateProfile(
+  body: Static<typeof updateProfileSchema> & { id: number }
+) {
   if (body.password && body.password != body.password_confirmation) {
     throw createError("password konfirmasi tidak sama");
   }

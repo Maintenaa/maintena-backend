@@ -6,7 +6,9 @@ import { createUserSchema, updateUserSchema } from "./user.schema";
 
 const userRepo = dataSource.getRepository(User);
 
-export async function createUser(user: Static<typeof createUserSchema>) {
+export async function createUser(
+  user: Omit<Static<typeof createUserSchema>, "password_confirmation">
+) {
   user.password = await generatePassword(user.password);
 
   return await userRepo.save(user);

@@ -6,3 +6,9 @@ export const createEmployeeSchema = t.Object({
   company_id: t.Number(),
   is_active: t.Optional(t.Boolean()),
 });
+
+export const registerEmployeeSchema = t.Object({
+  name: t.String({ minLength: 5 }),
+  email: t.String({ format: "email" }),
+  role: t.String({ minLength: 5 }),
+});

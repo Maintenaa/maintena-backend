@@ -4,19 +4,18 @@ import { createCompanySchema } from "./company.schema";
 import { createCompany } from "./company.service";
 
 export default function createCompanyRoute() {
-  return new Elysia({ prefix: "/company" })
-    .use(AuthMiddleware())
-
-    .post(
+  return new Elysia({ prefix: "/company" }).use(
+    AuthMiddleware().post(
       "/",
       async ({ body, user }) => {
         return createCompany({
           ...body,
-          owner: user,
+          owner: user!,
         });
       },
       {
         body: createCompanySchema,
       }
-    );
+    )
+  );
 }
