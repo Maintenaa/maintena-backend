@@ -5,8 +5,9 @@ import { User } from "../../database/entities";
 import { sign } from "jsonwebtoken";
 import { Config } from "../../core";
 import { createError } from "../common/common.service";
-import type { RegisterUser, UpdateProfile } from "../../types";
-import { createUser, updateUser } from "../user/user.service";
+import { createUser } from "../user/user.service";
+import type { Static } from "elysia";
+import { loginSchema, registerSchema } from "./auth.schema";
 
 const userRepo = dataSource.getRepository(User);
 
@@ -18,7 +19,7 @@ export async function verifyPassword(password: string, hashed: string) {
   return await compare(password, hashed);
 }
 
-export async function login(email: string, password: string) {
+export async function login({ email, password }: Static<typeof loginSchema>) {
   const user = await userRepo.findOne({
     select: ["id", "name", "email", "password", "is_superadmin"],
     where: { email },
@@ -57,36 +58,19 @@ export async function login(email: string, password: string) {
   };
 }
 
-export async function register(body: RegisterUser) {
-  if (body.password != body.password_confirmation) {
+export async function register(params: Static<typeof registerSchema>) {
+  if (params.password != params.password_confirmation) {
     throw createError("password konfirmasi tidak sama");
   }
 
-  const password = body.password;
+  const password = params.password;
 
-  const user = await createUser(body);
+  const user = await createUser(params);
 
-  const result = await login(user.email, password);
+  const result = await login({ email: user.email, password });
 
   return {
     ...result,
     message: "Berhasil registrasi akun",
-  };
-}
-
-export async function getProfile(id: number) {
-  return await userRepo.findOneBy({ id });
-}
-
-export async function updateProfile(body: UpdateProfile) {
-  if (body.password && body.password != body.password_confirmation) {
-    throw createError("password konfirmasi tidak sama");
-  }
-
-  const result = await updateUser(body);
-
-  return {
-    ...result,
-    message: "Berhasil mengupdate profil",
   };
 }

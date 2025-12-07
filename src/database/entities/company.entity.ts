@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BaseEntity,
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import type { Relation } from "typeorm";
 import { Employee } from "./employee.entity";
 import { Location } from "./location.entity";
@@ -15,8 +23,14 @@ export class Company extends BaseEntity {
   @Column({ type: "varchar", length: 255 })
   name: string;
 
-  @Column({ type: "int", default: 0 })
-  employees_count: number;
+  @Column({ type: "json" })
+  employees_count_range: number[];
+
+  @Column({ type: "varchar" })
+  email: string;
+
+  @Column({ type: "varchar" })
+  address: string;
 
   @CreateDateColumn()
   created_at: Date;

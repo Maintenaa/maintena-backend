@@ -1,7 +1,7 @@
 import { verify } from "jsonwebtoken";
 import { Config, logger } from "../../core";
 import Elysia from "elysia";
-import { getProfile } from "../auth/auth.service";
+import { getProfile } from "../profile/profile.service";
 
 export function CommonMiddleware() {
   return new Elysia().derive({ as: "global" }, async ({ headers }) => {

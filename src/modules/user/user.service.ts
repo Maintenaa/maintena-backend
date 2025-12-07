@@ -1,17 +1,18 @@
+import type { Static } from "elysia";
 import { dataSource } from "../../database/data-source";
 import { User } from "../../database/entities";
-import type { CreateUser, UpdateUser } from "../../types";
 import { generatePassword } from "../auth/auth.service";
+import { createUserSchema, updateUserSchema } from "./user.schema";
 
 const userRepo = dataSource.getRepository(User);
 
-export async function createUser(user: CreateUser) {
+export async function createUser(user: Static<typeof createUserSchema>) {
   user.password = await generatePassword(user.password);
 
   return await userRepo.save(user);
 }
 
-export async function updateUser(user: UpdateUser) {
+export async function updateUser(user: Static<typeof updateUserSchema>) {
   if (user.password) {
     user.password = await generatePassword(user.password);
   }
