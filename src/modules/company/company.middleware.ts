@@ -1,5 +1,5 @@
 import { dataSource } from "../../database/data-source";
-import { Company } from "../../database/entities";
+import { Company, Employee } from "../../database/entities";
 import { createError } from "../common/common.service";
 import { AuthMiddleware } from "../auth/auth.middleware";
 
@@ -10,7 +10,7 @@ export function CompanyMiddleware() {
 
       const company = await dataSource
         .getRepository(Company)
-        .findOneBy({ kode: companyKode });
+        .findOne({ where: { kode: companyKode }, relations: { owner: true } });
 
       return {
         company: company as Company,
@@ -21,4 +21,16 @@ export function CompanyMiddleware() {
         throw createError("Tidak dapat menemukan perusahaan", 401);
       }
     });
+}
+
+export function IsCompanyOwnerMiddleware() {
+  return CompanyMiddleware().onBeforeHandle(async ({ user, company }) => {
+    const employee = await dataSource.getRepository(Employee).findOne({
+      where: { user: { id: user.id }, company: { id: company.id } },
+    });
+
+    if (!employee?.is_owner) {
+      throw createError("Anda bukan pemilik perusahaan", 401);
+    }
+  });
 }

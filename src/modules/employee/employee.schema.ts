@@ -12,3 +12,7 @@ export const registerEmployeeSchema = t.Object({
   email: t.String({ format: "email" }),
   role: t.String({ minLength: 5 }),
 });
+
+export const updateEmployeeSchema = t.Object({
+  role: t.String(),
+});

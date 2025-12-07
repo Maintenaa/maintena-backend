@@ -1,21 +1,57 @@
 import Elysia from "elysia";
-import { CompanyMiddleware } from "../company/company.middleware";
-import { registerEmployeeSchema } from "./employee.schema";
-import { registerEmployee } from "./employee.servive";
+import {
+  CompanyMiddleware,
+  IsCompanyOwnerMiddleware,
+} from "../company/company.middleware";
+import {
+  registerEmployeeSchema,
+  updateEmployeeSchema,
+} from "./employee.schema";
+import {
+  deleteEmployee,
+  getEmployees,
+  registerEmployee,
+  updateEmployee,
+} from "./employee.service";
+import { paramsId } from "../common/common.schema";
 
 export default function createEmployeeRoute() {
   return new Elysia({ prefix: "/employee" }).use(
-    CompanyMiddleware().post(
-      "/",
-      ({ body, company }) => {
-        return registerEmployee({
-          ...body,
-          company_id: company.id,
-        });
-      },
-      {
-        body: registerEmployeeSchema,
-      }
-    )
+    CompanyMiddleware()
+      .get("/", ({ company }) => {
+        return getEmployees({ company_id: company.id });
+      })
+
+      .use(
+        IsCompanyOwnerMiddleware()
+          .post(
+            "/",
+            ({ body, company }) => {
+              return registerEmployee({
+                ...body,
+                company_id: company.id,
+              });
+            },
+            {
+              body: registerEmployeeSchema,
+            }
+          )
+          .put(
+            "/:id",
+            ({ body, params }) => {
+              return updateEmployee(params.id, body);
+            },
+            { params: paramsId, body: updateEmployeeSchema }
+          )
+          .delete(
+            "/:id",
+            ({ params }) => {
+              return deleteEmployee(params.id);
+            },
+            {
+              params: paramsId,
+            }
+          )
+      )
   );
 }

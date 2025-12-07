@@ -2,9 +2,11 @@ import type { Static } from "elysia";
 import {
   createEmployeeSchema,
   registerEmployeeSchema,
+  updateEmployeeSchema,
 } from "./employee.schema";
 import { dataSource } from "../../database/data-source";
 import { Employee, User } from "../../database/entities";
+import { createError } from "../common/common.service";
 
 const userRepo = dataSource.getRepository(User);
 const employeeRepo = dataSource.getRepository(Employee);
@@ -48,5 +50,47 @@ export async function registerEmployee(
     ...result,
     message: "Berhasil mendaftarkan karyawan",
     user,
+  };
+}
+
+export async function getEmployees({ company_id }: { company_id: number }) {
+  const employees = await employeeRepo.find({
+    where: { company: { id: company_id } },
+    relations: {
+      user: true,
+    },
+    order: { created_at: "ASC" },
+  });
+
+  return {
+    employees,
+  };
+}
+
+export async function updateEmployee(
+  id: number,
+  body: Static<typeof updateEmployeeSchema>
+) {
+  const employee = await employeeRepo.findOne({ where: { id } });
+
+  if (!employee) {
+    throw createError("Karyawan tidak ditemukan", 401);
+  }
+
+  employee.role = body.role;
+
+  await employeeRepo.save(employee);
+
+  return {
+    message: "Berhasil mengupdate karyawan",
+    employee,
+  };
+}
+
+export async function deleteEmployee(id: number) {
+  await employeeRepo.delete({ id });
+
+  return {
+    message: "Karyawan berhasil dihapus",
   };
 }

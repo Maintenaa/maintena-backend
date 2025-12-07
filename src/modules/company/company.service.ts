@@ -2,7 +2,7 @@ import type { Static } from "elysia";
 import { createCompanySchema } from "./company.schema";
 import { dataSource } from "../../database/data-source";
 import { Company, User } from "../../database/entities";
-import { createEmployee } from "../employee/employee.servive";
+import { createEmployee } from "../employee/employee.service";
 import { v4 as uuidv4 } from "uuid";
 
 const companyRepo = dataSource.getRepository(Company);
