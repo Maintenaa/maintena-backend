@@ -1,7 +1,7 @@
 import type { Static } from "elysia";
 import { createCompanySchema } from "./company.schema";
 import { dataSource } from "../../database/data-source";
-import { Company, User } from "../../database/entities";
+import { Company, EmployeeRole, User } from "../../database/entities";
 import { createEmployee } from "../employee/employee.service";
 import { v4 as uuidv4 } from "uuid";
 
@@ -19,7 +19,7 @@ export async function createCompany(body: CreateCompany) {
 
   await createEmployee({
     user_id: body.owner.id,
-    role: "Owner",
+    role: EmployeeRole.OWNER,
     company_id: company.id,
     is_owner: true,
   });

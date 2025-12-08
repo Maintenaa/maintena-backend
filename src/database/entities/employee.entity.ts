@@ -13,12 +13,31 @@ import {
 import { User } from "./user.entity";
 import { Company } from "./company.entity";
 
+export const employeeRoles = [
+  "admin",
+  "leader",
+  "manager",
+  "supervisor",
+  "member",
+  "worker",
+];
+
+export enum EmployeeRole {
+  OWNER = "owner",
+  ADMIN = "admin",
+  LEADER = "leader",
+  MANAGER = "manager",
+  SUPERVISOR = "supervisor",
+  MEMBER = "member",
+  WORKER = "worker",
+}
+
 @Entity({ name: "employees" })
 export class Employee extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "varchar" })
+  @Column({ type: "enum", enum: EmployeeRole, default: EmployeeRole.MEMBER })
   role: string;
 
   @Column({ type: "boolean", nullable: false, default: false })
