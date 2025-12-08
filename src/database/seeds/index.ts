@@ -1,5 +1,6 @@
 import { logger } from "../../core";
 import { dataSource } from "../data-source";
+import { AssetCategorySeeder } from "./asset_category.seeder";
 import type { BaseSeeder } from "./base.seeder";
 import { UserSeeder } from "./user.seeder";
 
@@ -13,7 +14,7 @@ async function main() {
     return;
   }
 
-  const seeders: BaseSeeder[] = [new UserSeeder()];
+  const seeders: BaseSeeder[] = [new UserSeeder(), new AssetCategorySeeder()];
 
   for (const seeder of seeders) {
     let oldTime = new Date().getTime();
