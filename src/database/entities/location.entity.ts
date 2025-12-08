@@ -1,18 +1,21 @@
 import {
-  Entity,
   PrimaryGeneratedColumn,
   Column,
   BaseEntity,
   ManyToOne,
   JoinColumn,
-  OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
+  Tree,
+  TreeParent,
+  TreeChildren,
+  Entity,
 } from "typeorm";
 import type { Relation } from "typeorm";
 import { Company } from "./company.entity";
 
-@Entity({ name: "locations" })
+@Entity("locations")
+@Tree("closure-table")
 export class Location extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -23,21 +26,16 @@ export class Location extends BaseEntity {
   @Column()
   company_id: number;
 
-  @Column({ nullable: true })
-  parent_id: number;
-
   @ManyToOne(() => Company, (company) => company.locations)
   @JoinColumn({ name: "company_id" })
   company: Relation<Company>;
 
-  @ManyToOne(() => Location, (location) => location.children, {
-    nullable: true,
-  })
-  @JoinColumn({ name: "parent_id" })
+  @TreeParent()
   parent: Relation<Location>;
 
-  @OneToMany(() => Location, (location) => location.parent)
+  @TreeChildren()
   children: Relation<Location[]>;
+
   @CreateDateColumn()
   created_at: Date;
 
