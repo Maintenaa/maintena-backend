@@ -31,7 +31,7 @@ export class Location extends BaseEntity {
   company: Relation<Company>;
 
   @TreeParent()
-  parent: Relation<Location>;
+  parent?: Relation<Location | null>;
 
   @TreeChildren()
   children: Relation<Location[]>;
