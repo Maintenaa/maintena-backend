@@ -1,4 +1,4 @@
-import Elysia, { t } from "elysia";
+import Elysia from "elysia";
 import { CompanyMiddleware } from "../company/company.middleware";
 import {
   createWorkOrderSchema,

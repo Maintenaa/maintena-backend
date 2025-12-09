@@ -1,6 +1,6 @@
 import type { Static } from "elysia";
 import { dataSource } from "../../database/data-source";
-import { WorkOrder, WorkOrderUsedPart } from "../../database/entities";
+import { WorkOrder } from "../../database/entities";
 import {
   createWorkOrderSchema,
   updateWorkOrderSchema,
