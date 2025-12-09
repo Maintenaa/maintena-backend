@@ -30,12 +30,3 @@ export const assignWorkOrderSchema = t.Object({
   assigned_to: t.Number(),
   due_at: t.Date(),
 });
-
-export const addUsedPartSchema = t.Object({
-  part_id: t.Number(),
-  quantity: t.Number(),
-});
-
-export const updateUsedPartSchema = t.Object({
-  quantity: t.Optional(t.Number()),
-});

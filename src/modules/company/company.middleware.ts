@@ -5,7 +5,13 @@ import { AuthMiddleware } from "../auth/auth.middleware";
 
 export function CompanyMiddleware() {
   return AuthMiddleware()
-    .derive(async ({ headers }) => {
+    .derive(async ({ headers, company: oldCompany }: any) => {
+      if (oldCompany) {
+        return {
+          company: oldCompany as Company,
+        };
+      }
+
       const companyKode = headers["company-kode"] || "";
 
       const company = await dataSource

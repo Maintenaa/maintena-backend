@@ -4,8 +4,6 @@ import {
   createWorkOrderSchema,
   updateWorkOrderSchema,
   assignWorkOrderSchema,
-  addUsedPartSchema,
-  updateUsedPartSchema,
 } from "./work-order.schema";
 import {
   createWorkOrder,
@@ -14,17 +12,9 @@ import {
   updateWorkOrder,
   assignWorkOrder,
   deleteWorkOrder,
-  addUsedPart,
-  getUsedParts,
-  updateUsedPart,
-  removeUsedPart,
 } from "./work-order.service";
 import { paramsId } from "../common/common.schema";
-
-const paramsUsedPartId = t.Object({
-  id: t.Number(),
-  usedPartId: t.Number(),
-});
+import { createWorkOrderUsedPartRoute } from "./work-order-used-part/work-order-used-part.route";
 
 export default function createWorkOrderRoute() {
   return new Elysia({ prefix: "/work-order" }).use(
@@ -79,47 +69,6 @@ export default function createWorkOrderRoute() {
           params: paramsId,
         }
       )
-      // Used Parts
-      .post(
-        "/:id/used-parts",
-        async ({ params, body, company }) => {
-          return addUsedPart(company.id, params.id, body);
-        },
-        {
-          body: addUsedPartSchema,
-          params: paramsId,
-        }
-      )
-      .get(
-        "/:id/used-parts",
-        async ({ params, company }) => {
-          return getUsedParts(company.id, params.id);
-        },
-        {
-          params: paramsId,
-        }
-      )
-      .put(
-        "/:id/used-parts/:usedPartId",
-        async ({ params, body, company }) => {
-          return updateUsedPart(company.id, params.id, params.usedPartId, body);
-        },
-        {
-          body: updateUsedPartSchema,
-          params: t.Object({
-            id: t.Number(),
-            usedPartId: t.Number(),
-          }),
-        }
-      )
-      .delete(
-        "/:id/used-parts/:usedPartId",
-        async ({ params, company }) => {
-          return removeUsedPart(company.id, params.id, params.usedPartId);
-        },
-        {
-          params: paramsUsedPartId,
-        }
-      )
+      .use(createWorkOrderUsedPartRoute())
   );
 }
