@@ -17,6 +17,7 @@ import createEmployeeRoute from "../modules/employee/employee.route";
 import createLocationRoute from "../modules/location/location.route";
 import createAssetRoute from "../modules/asset/asset.route";
 import createPartRoute from "../modules/part/part.route";
+import createPreventiveMaintenanceRoute from "../modules/preventive-maintenance/preventive-maintenance.route";
 
 export default function buildElysiaServer() {
   return (
@@ -45,6 +46,7 @@ export default function buildElysiaServer() {
       .use(createLocationRoute())
       .use(createAssetRoute())
       .use(createPartRoute())
+      .use(createPreventiveMaintenanceRoute())
 
       // run server
       .listen(Config.APP_PORT)
