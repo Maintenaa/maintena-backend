@@ -15,6 +15,8 @@ import createProfileRoute from "../modules/profile/profile.route";
 import createCompanyRoute from "../modules/company/company.route";
 import createEmployeeRoute from "../modules/employee/employee.route";
 import createLocationRoute from "../modules/location/location.route";
+import createAssetRoute from "../modules/asset/asset.route";
+import createPartRoute from "../modules/part/part.route";
 
 export default function buildElysiaServer() {
   return (
@@ -41,6 +43,8 @@ export default function buildElysiaServer() {
       .use(createCompanyRoute())
       .use(createEmployeeRoute())
       .use(createLocationRoute())
+      .use(createAssetRoute())
+      .use(createPartRoute())
 
       // run server
       .listen(Config.APP_PORT)
