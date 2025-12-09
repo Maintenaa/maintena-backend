@@ -30,7 +30,7 @@ export class Company extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "uuid" })
+  @Column({ type: "uuid", unique: true })
   kode: string;
 
   @Column({ type: "varchar", length: 255 })

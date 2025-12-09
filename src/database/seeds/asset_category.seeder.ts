@@ -1,9 +1,12 @@
-import { createAssetCategory } from "../../modules/asset-category/asset-category.service";
+import { dataSource } from "../data-source";
+import { AssetCategory } from "../entities";
 import type { BaseSeeder } from "./base.seeder";
 
 export class AssetCategorySeeder implements BaseSeeder {
   name: string = "asset category";
   async run(): Promise<void> {
+    const categoryRepo = dataSource.getRepository(AssetCategory);
+
     const categories = [
       "Gedung & Bangunan",
       "Kendaraan",
@@ -20,7 +23,7 @@ export class AssetCategorySeeder implements BaseSeeder {
     ];
 
     for (const category of categories) {
-      await createAssetCategory({
+      await categoryRepo.save({
         name: category,
       });
     }
