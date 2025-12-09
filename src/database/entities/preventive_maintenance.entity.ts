@@ -40,8 +40,8 @@ export class PreventiveMaintenance extends BaseEntity {
   company: Relation<Company>;
 
   @ManyToOne(() => Asset)
-  @JoinColumn({ name: "asset_id", referencedColumnName: "kode" })
   asset: Relation<Asset>;
+
   @CreateDateColumn()
   created_at: Date;
 

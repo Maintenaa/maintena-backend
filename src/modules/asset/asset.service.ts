@@ -20,9 +20,9 @@ export async function getAssets(companyId: number) {
   });
 }
 
-export async function getAssetByKode(companyId: number, kode: string) {
+export async function getAssetByCode(companyId: number, code: string) {
   const asset = await assetRepo.findOne({
-    where: { kode, company_id: companyId },
+    where: { code, company_id: companyId },
     relations: ["category", "location"],
   });
 
@@ -35,18 +35,18 @@ export async function getAssetByKode(companyId: number, kode: string) {
 
 export async function updateAsset(
   companyId: number,
-  kode: string,
+  code: string,
   body: Static<typeof updateAssetSchema>
 ) {
-  const asset = await getAssetByKode(companyId, kode);
+  const asset = await getAssetByCode(companyId, code);
 
   Object.assign(asset, body);
 
   return await assetRepo.save(asset);
 }
 
-export async function deleteAsset(companyId: number, kode: string) {
-  const asset = await getAssetByKode(companyId, kode);
+export async function deleteAsset(companyId: number, code: string) {
+  const asset = await getAssetByCode(companyId, code);
 
   return await assetRepo.remove(asset);
 }

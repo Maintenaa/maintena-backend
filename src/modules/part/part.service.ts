@@ -20,9 +20,9 @@ export async function getParts(companyId: number) {
   });
 }
 
-export async function getPartById(companyId: number, id: number) {
+export async function getPartByCode(companyId: number, code: string) {
   const part = await partRepo.findOne({
-    where: { id, company_id: companyId },
+    where: { code, company_id: companyId },
     relations: ["location"],
   });
 
@@ -35,18 +35,18 @@ export async function getPartById(companyId: number, id: number) {
 
 export async function updatePart(
   companyId: number,
-  id: number,
+  code: string,
   body: Static<typeof updatePartSchema>
 ) {
-  const part = await getPartById(companyId, id);
+  const part = await getPartByCode(companyId, code);
 
   Object.assign(part, body);
 
   return await partRepo.save(part);
 }
 
-export async function deletePart(companyId: number, id: number) {
-  const part = await getPartById(companyId, id);
+export async function deletePart(companyId: number, code: string) {
+  const part = await getPartByCode(companyId, code);
 
   return await partRepo.remove(part);
 }

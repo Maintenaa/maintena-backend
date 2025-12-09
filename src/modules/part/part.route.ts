@@ -4,13 +4,14 @@ import { createPartSchema, updatePartSchema } from "./part.schema";
 import {
   createPart,
   getParts,
-  getPartById,
+  getPartByCode,
   updatePart,
   deletePart,
 } from "./part.service";
+import { paramsCode } from "../common/common.schema";
 
 export default function createPartRoute() {
-  return new Elysia({ prefix: "/parts" }).use(
+  return new Elysia({ prefix: "/part" }).use(
     CompanyMiddleware()
       .post(
         "/",
@@ -24,20 +25,33 @@ export default function createPartRoute() {
       .get("/", async ({ company }) => {
         return getParts(company.id);
       })
-      .get("/:id", async ({ params, company }) => {
-        return getPartById(company.id, parseInt(params.id));
-      })
+      .get(
+        "/:code",
+        async ({ params, company }) => {
+          return getPartByCode(company.id, params.code);
+        },
+        {
+          params: paramsCode,
+        }
+      )
       .put(
-        "/:id",
+        "/:code",
         async ({ params, body, company }) => {
-          return updatePart(company.id, parseInt(params.id), body);
+          return updatePart(company.id, params.code, body);
         },
         {
           body: updatePartSchema,
+          params: paramsCode,
         }
       )
-      .delete("/:id", async ({ params, company }) => {
-        return deletePart(company.id, parseInt(params.id));
-      })
+      .delete(
+        "/:code",
+        async ({ params, company }) => {
+          return deletePart(company.id, params.code);
+        },
+        {
+          params: paramsCode,
+        }
+      )
   );
 }

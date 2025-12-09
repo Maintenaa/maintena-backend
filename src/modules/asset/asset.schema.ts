@@ -1,7 +1,6 @@
 import { t } from "elysia";
 
 export const createAssetSchema = t.Object({
-  kode: t.String(),
   category_id: t.Number(),
   location_id: t.Number(),
   name: t.String(),

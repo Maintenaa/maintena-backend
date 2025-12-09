@@ -65,7 +65,6 @@ export class WorkOrder extends BaseEntity {
   company: Relation<Company>;
 
   @ManyToOne(() => Asset)
-  @JoinColumn({ name: "asset_id", referencedColumnName: "kode" })
   asset: Relation<Asset>;
 
   @ManyToOne(() => User)

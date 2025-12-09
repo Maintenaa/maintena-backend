@@ -4,13 +4,14 @@ import { createAssetSchema, updateAssetSchema } from "./asset.schema";
 import {
   createAsset,
   getAssets,
-  getAssetByKode,
+  getAssetByCode,
   updateAsset,
   deleteAsset,
 } from "./asset.service";
+import { paramsCode } from "../common/common.schema";
 
 export default function createAssetRoute() {
-  return new Elysia({ prefix: "/assets" }).use(
+  return new Elysia({ prefix: "/asset" }).use(
     CompanyMiddleware()
       .post(
         "/",
@@ -24,20 +25,33 @@ export default function createAssetRoute() {
       .get("/", async ({ company }) => {
         return getAssets(company.id);
       })
-      .get("/:kode", async ({ params, company }) => {
-        return getAssetByKode(company.id, params.kode);
-      })
+      .get(
+        "/:code",
+        async ({ params, company }) => {
+          return getAssetByCode(company.id, params.code);
+        },
+        {
+          params: paramsCode,
+        }
+      )
       .put(
-        "/:kode",
+        "/:code",
         async ({ params, body, company }) => {
-          return updateAsset(company.id, params.kode, body);
+          return updateAsset(company.id, params.code, body);
         },
         {
           body: updateAssetSchema,
+          params: paramsCode,
         }
       )
-      .delete("/:kode", async ({ params, company }) => {
-        return deleteAsset(company.id, params.kode);
-      })
+      .delete(
+        "/:code",
+        async ({ params, company }) => {
+          return deleteAsset(company.id, params.code);
+        },
+        {
+          params: paramsCode,
+        }
+      )
   );
 }

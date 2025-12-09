@@ -15,8 +15,8 @@ import { Location } from "./location.entity";
 
 @Entity({ name: "assets" })
 export class Asset extends BaseEntity {
-  @PrimaryColumn({ type: "varchar", length: 255 })
-  kode: string;
+  @PrimaryColumn("uuid")
+  code: string;
 
   @Column()
   company_id: number;

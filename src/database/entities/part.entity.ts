@@ -14,8 +14,8 @@ import { Location } from "./location.entity";
 
 @Entity({ name: "parts" })
 export class Part extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn("uuid")
+  code: string;
 
   @Column()
   company_id: number;

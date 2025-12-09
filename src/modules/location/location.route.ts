@@ -10,7 +10,7 @@ import {
 import { CompanyMiddleware } from "../company/company.middleware";
 
 export default function createLocationRoute() {
-  return new Elysia({ prefix: "/locations" }).use(
+  return new Elysia({ prefix: "/location" }).use(
     CompanyMiddleware()
       .get("/", async ({ company }) => {
         return await getLocations(company.id);
