@@ -1,4 +1,13 @@
-import { Entity, Column, BaseEntity, ManyToOne, JoinColumn, PrimaryColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import {
+  Entity,
+  Column,
+  BaseEntity,
+  ManyToOne,
+  JoinColumn,
+  PrimaryColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import type { Relation } from "typeorm";
 import { Company } from "./company.entity";
 import { AssetCategory } from "./asset_category.entity";

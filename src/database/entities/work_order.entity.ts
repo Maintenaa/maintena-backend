@@ -1,4 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, JoinColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BaseEntity,
+  ManyToOne,
+  JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import type { Relation } from "typeorm";
 import { Company } from "./company.entity";
 import { Asset } from "./asset.entity";
@@ -27,7 +36,10 @@ export class WorkOrder extends BaseEntity {
   @Column({ type: "enum", enum: ["low", "medium", "high"] })
   priority: "low" | "medium" | "high";
 
-  @Column({ type: "enum", enum: ["pending", "progress", "completed", "failed"] })
+  @Column({
+    type: "enum",
+    enum: ["pending", "progress", "completed", "failed"],
+  })
   status: "pending" | "progress" | "completed" | "failed";
 
   @Column()
