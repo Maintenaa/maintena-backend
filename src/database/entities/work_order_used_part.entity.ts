@@ -7,6 +7,7 @@ import {
   JoinColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  Generated,
 } from "typeorm";
 import type { Relation } from "typeorm";
 import { WorkOrder } from "./work_order.entity";
@@ -19,9 +20,6 @@ export class WorkOrderUsedPart extends BaseEntity {
 
   @Column()
   work_order_id: number;
-
-  @Column()
-  part_id: number;
 
   @Column({ type: "int", default: 0 })
   quantity: number;
@@ -36,6 +34,7 @@ export class WorkOrderUsedPart extends BaseEntity {
   @ManyToOne(() => Part)
   @JoinColumn({ name: "part_id" })
   part: Relation<Part>;
+
   @CreateDateColumn()
   created_at: Date;
 

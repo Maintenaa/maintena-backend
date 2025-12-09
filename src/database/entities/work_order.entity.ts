@@ -7,6 +7,7 @@ import {
   JoinColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  Generated,
 } from "typeorm";
 import type { Relation } from "typeorm";
 import { Company } from "./company.entity";
@@ -17,6 +18,10 @@ import { User } from "./user.entity";
 export class WorkOrder extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column({ type: "varchar", unique: true })
+  @Generated("uuid")
+  code: string;
 
   @Column()
   company_id: number;
