@@ -7,13 +7,13 @@ export const logger = createLogger({
   level: Config.isDevelopment ? "debug" : "info",
   format: winston.format.combine(
     winston.format.timestamp(),
-    winston.format.colorize({ all: true }),
+    winston.format.colorize(),
     winston.format.simple(),
     winston.format.printf((props) => {
       const { timestamp, level, message, ...others } = props;
 
       const formatedTimestamp = moment(timestamp as any).format(
-        "YYY-MM-DD HH:mm:ss"
+        "YYYY-MM-DD HH:mm:ss"
       );
 
       return `[${formatedTimestamp.cyan}] ${level}: ${message}`;

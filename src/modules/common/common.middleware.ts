@@ -1,5 +1,5 @@
 import { verify } from "jsonwebtoken";
-import { Config, logger } from "../../core";
+import { Config } from "../../core";
 import Elysia from "elysia";
 import { getProfile } from "../profile/profile.service";
 
@@ -36,7 +36,7 @@ export function CommonMiddleware() {
         };
       }
     } catch (err) {
-      logger.warn("No token found");
+      //
     }
   });
 }

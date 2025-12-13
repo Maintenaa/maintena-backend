@@ -9,14 +9,9 @@ export function LoggerMiddleware() {
         oldTime,
       };
     })
-    .onBeforeHandle(
-      { as: "global" },
-      ({ route, request: { method }, oldTime }) => {
-        oldTime = new Date();
-        console.log("");
-        logger.info(`💧 [${method}] ${route} started`);
-      }
-    )
+    .onBeforeHandle({ as: "global" }, ({ oldTime }) => {
+      oldTime = new Date();
+    })
     .onAfterResponse({ as: "global" }, (req) => {
       const {
         route,
@@ -28,7 +23,20 @@ export function LoggerMiddleware() {
       const time = new Date().getTime() - (oldTime || new Date()).getTime();
       const status = (set.status as number) || 200;
 
-      const message = `🌊 [${method}] ${route} completed in ${time}ms with status ${status}`;
+      const methodColor =
+        {
+          GET: "blue",
+          POST: "cyan",
+          PUT: "yellow",
+          DELETE: "red",
+        }[method] || "cyan";
+
+      const methodFormated = method[methodColor as any];
+      const routeFormated = route[methodColor as any];
+      const statusFormated =
+        status >= 400 ? status.toString().red : status.toString().cyan;
+
+      const message = `[${methodFormated}] ${routeFormated} completed in ${time}ms with status ${statusFormated}`;
 
       if (status >= 500) {
         logger.error(message);
