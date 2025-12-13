@@ -35,7 +35,7 @@ export function LoggerMiddleware() {
       } else if (status >= 400) {
         logger.warn(message);
       } else {
-        logger.success(message);
+        logger.info(message);
       }
     });
 }

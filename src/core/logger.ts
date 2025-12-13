@@ -1,27 +1,23 @@
 import "colors";
+import winston, { createLogger } from "winston";
+import { Config } from "./config";
 import moment from "moment";
 
-class Logger {
-  log(...message: string[]) {
-    const time = moment().format("YYYY-MM-DD HH:mm:ss");
-    console.log(`[${time}]`.cyan, ...message);
-  }
+export const logger = createLogger({
+  level: Config.isDevelopment ? "debug" : "info",
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.colorize({ all: true }),
+    winston.format.simple(),
+    winston.format.printf((props) => {
+      const { timestamp, level, message, ...others } = props;
 
-  info(...message: string[]) {
-    this.log(...message.map((m) => m.blue));
-  }
+      const formatedTimestamp = moment(timestamp as any).format(
+        "YYY-MM-DD HH:mm:ss"
+      );
 
-  error(...message: string[]) {
-    this.log(...message.map((m) => m.red));
-  }
-
-  warn(...message: string[]) {
-    this.log(...message.map((m) => m.yellow));
-  }
-
-  success(...message: string[]) {
-    this.log(...message.map((m) => m.green));
-  }
-}
-
-export const logger = new Logger();
+      return `[${formatedTimestamp.cyan}] ${level}: ${message}`;
+    })
+  ),
+  transports: [new winston.transports.Console()],
+});

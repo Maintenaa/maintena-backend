@@ -9,7 +9,7 @@ import { LocationSeeder } from "./location.seeder";
 import { UserSeeder } from "./user.seeder";
 
 async function main() {
-  logger.success("🌱 Start seeding database");
+  logger.debug("🌱 Start seeding database");
 
   try {
     await dataSource.initialize();
@@ -45,7 +45,7 @@ async function main() {
   }
 
   console.log("");
-  logger.success("💉 All seeders completed");
+  logger.debug("💉 All seeders completed");
 
   process.exit(0);
 }

@@ -3,12 +3,13 @@ import { Config, logger } from "../core";
 import buildElysiaServer from "./elysia";
 export async function buildServer() {
   try {
+    logger.info("Connecting to database...");
     await dataSource.initialize();
-    logger.success(`📀 Database connected`);
+    logger.info(`📀 Database connected`);
 
     buildElysiaServer();
 
-    logger.success(
+    logger.debug(
       `🚀 Application is running at http://localhost:${Config.APP_PORT}`
     );
   } catch (err) {
