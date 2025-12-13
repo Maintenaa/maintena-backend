@@ -10,8 +10,13 @@ export class Config {
   static DB_PASSWORD: string = process.env.DB_PASSWORD || "";
   static DB_NAME: string = process.env.DB_NAME || "";
 
-  //jwt
+  // jwt
   static JWT_SECRET_KEY: string = process.env.JWT_SECRET_KEY || "";
+
+  // ai
+  static AI_BASE_URL: string = process.env.AI_BASE_URL || "";
+  static AI_API_KEY: string = process.env.AI_API_KEY || "";
+  static AI_MODEL: string = process.env.AI_MODEL || "";
 
   // client
   static CLIENT_URL: string = process.env.CLIENT_URL || "*";
