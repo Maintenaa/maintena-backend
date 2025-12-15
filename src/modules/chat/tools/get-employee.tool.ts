@@ -20,7 +20,7 @@ export const getEmployeTool = tool(
   {
     name: "get_employee_tool",
     description:
-      "Tool ini digunakan untuk mengambil data pengguna dari sebuah perusahaan dengan. Gunakan hanya jika pertanyaan membutuhkan data pengguna. Input yang digunakan adalah company_id dengan tipe data integer. Jangan gunakan untuk pertanyaan-pertanyaan umum.",
+      "Tool ini digunakan untuk mengambil data pengguna dari sebuah perusahaan dengan. Gunakan hanya jika pertanyaan membutuhkan data pengguna. Input yang digunakan adalah company_id (integer). Jangan gunakan untuk pertanyaan-pertanyaan umum.",
     parameters: z.object({
       company_id: z.int(),
     }),
