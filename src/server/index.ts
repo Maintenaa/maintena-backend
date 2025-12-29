@@ -1,19 +1,15 @@
-import { dataSource } from "../database/data-source";
 import { Config, logger } from "../core";
+import { checkHealth } from "../modules/check-health/check-health.service";
 import buildElysiaServer from "./elysia";
 export async function buildServer() {
   try {
-    logger.info("Connecting to database...");
-    await dataSource.initialize();
-    logger.info(`📀 Database connected`);
-
+    await checkHealth();
     buildElysiaServer();
 
     logger.debug(
       `🚀 Application is running at http://localhost:${Config.APP_PORT}`
     );
   } catch (err) {
-    logger.error("Gagal memulai server");
-    console.log(err);
+    logger.error("Gagal memulai server", { error: err });
   }
 }

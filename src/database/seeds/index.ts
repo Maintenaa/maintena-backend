@@ -30,7 +30,6 @@ async function main() {
   for (const seeder of seeders) {
     let oldTime = new Date().getTime();
 
-    console.log("");
     logger.info(`Running seeder ${seeder.name}`);
 
     try {
@@ -40,11 +39,9 @@ async function main() {
       logger.info(`Seeder ${seeder.name} completed in ${time}ms`);
     } catch (err) {
       logger.error(`Failed to run seeder ${seeder.name}\n`);
-      // console.log(err);
     }
   }
 
-  console.log("");
   logger.debug("💉 All seeders completed");
 
   process.exit(0);
