@@ -1,23 +1,23 @@
-import type { Static } from "elysia";
+import { agentToolCallEvent, agentStreamEvent } from "@llamaindex/workflow";
+import { sse, type Static } from "elysia";
 import { createChatSchema } from "./chat.schema";
-import { createMainAgent } from "./agent/main.agent";
+import { createChatAgent } from "./agent/main.agent";
+import type { User } from "../../database/entities";
+import { stream_handler } from "../../lib/llm_handler";
 
 export async function* createChat({
-  message,
-  company_id,
+	message,
+	company_id,
+	user,
 }: Static<typeof createChatSchema> & {
-  company_id: number;
+	company_id: number;
+	user?: User;
 }) {
-  const agent = createMainAgent({ company_id });
+	const agent = await createChatAgent({ company_id, user });
 
-  const result = await agent.chat({ message, stream: true });
+	const handler = agent.runStream(message);
 
-  for await (const chunk of result) {
-    yield chunk.delta;
-  }
-
-  return {
-    company_id,
-    message,
-  };
+	for await (const chunk of stream_handler(handler)) {
+		yield sse(JSON.stringify(chunk));
+	}
 }

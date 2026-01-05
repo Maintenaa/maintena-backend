@@ -1,12 +1,9 @@
 import { tool } from "llamaindex";
 import z from "zod";
-import { logger } from "../../../core";
 import { getCompany } from "../../company/company.service";
 
 export const getCompanyTool = tool(
 	async ({ company_id }) => {
-		logger.info("Using get company tool");
-
 		const { company } = await getCompany(company_id);
 
 		if (!company) {
