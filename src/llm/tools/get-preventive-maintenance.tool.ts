@@ -1,6 +1,6 @@
 import { tool } from "llamaindex";
 import z from "zod";
-import { getPreventiveMaintenances } from "../../preventive-maintenance/preventive-maintenance.service";
+import { getPreventiveMaintenances } from "../../modules/preventive-maintenance/preventive-maintenance.service";
 
 export const getPreventiveMaintenanceTool = tool(
 	async ({ company_id }) => {

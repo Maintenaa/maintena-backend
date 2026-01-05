@@ -1,13 +1,13 @@
 import { agent } from "@llamaindex/workflow";
-import { llm } from "../../../core/llm";
-import { getEmployeTool } from "../tools/get-employee.tool";
-import { getPartsTool } from "../tools/get-parts.tool";
-import { getAssetsTool } from "../tools/get-assets.tool";
-import { getLocationsTool } from "../tools/get-locations.tool";
-import { getWorkOrderTool } from "../tools/get-work-order.tool";
-import { getPreventiveMaintenanceTool } from "../tools/get-preventive-maintenance.tool";
-import type { User } from "../../../database/entities";
-import { getCompany } from "../../company/company.service";
+import { llm } from "../../core/llm";
+import { getEmployeTool } from "../../llm/tools/get-employee.tool";
+import { getPartsTool } from "../../llm/tools/get-parts.tool";
+import { getAssetsTool } from "../../llm/tools/get-assets.tool";
+import { getLocationsTool } from "../../llm/tools/get-locations.tool";
+import { getWorkOrderTool } from "../../llm/tools/get-work-order.tool";
+import { getPreventiveMaintenanceTool } from "../../llm/tools/get-preventive-maintenance.tool";
+import type { User } from "../../database/entities";
+import { getCompany } from "../company/company.service";
 
 export async function createChatAgent(props: {
 	company_id: number;

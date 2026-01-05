@@ -1,6 +1,6 @@
 import { tool } from "llamaindex";
 import z from "zod";
-import { getAssets } from "../../asset/asset.service";
+import { getAssets } from "../../modules/asset/asset.service";
 
 export const getAssetsTool = tool(
 	async ({ company_id }) => {

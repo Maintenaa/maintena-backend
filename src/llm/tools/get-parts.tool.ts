@@ -1,6 +1,6 @@
 import { tool } from "llamaindex";
 import z from "zod";
-import { getParts } from "../../part/part.service";
+import { getParts } from "../../modules/part/part.service";
 
 export const getPartsTool = tool(
 	async ({ company_id }) => {
