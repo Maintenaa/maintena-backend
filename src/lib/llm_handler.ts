@@ -32,5 +32,7 @@ export async function* stream_handler(
 		}
 	}
 
+	logger.debug(`Response: \n${response}`);
+
 	yield new StreamResponse(response, "end", true);
 }
