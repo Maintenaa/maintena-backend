@@ -7,23 +7,19 @@ import { getLocationsTool } from "../../llm/tools/get-locations.tool";
 import { getWorkOrderTool } from "../../llm/tools/get-work-order.tool";
 import { getPreventiveMaintenanceTool } from "../../llm/tools/get-preventive-maintenance.tool";
 import type { User } from "../../database/entities";
-import { getCompany } from "../company/company.service";
+import { getCompanyTool } from "../../llm/tools/get-company.tool";
 
 export async function createChatAgent(props: {
 	company_id: number;
 	user?: User;
 }) {
 	const { company_id, user } = props;
-	const { company } = await getCompany(company_id);
-
-	if (!company) {
-		throw new Error("Perusahaan tidak ditemukan");
-	}
 
 	return agent({
 		llm,
 		name: "chat_agent",
 		tools: [
+			getCompanyTool,
 			getEmployeTool,
 			getPartsTool,
 			getAssetsTool,
@@ -35,14 +31,7 @@ export async function createChatAgent(props: {
 - Kamu sedang berkomunikasi dengan ${user?.name ? `user bernama "${user.name}"` : `seorang customer`} dari perusahaan yang sedang kamu tangani.
 - Posisikan diri anda sebagai orang ketiga (bukan anggota dari perusahaan).
 - Jika user tidak menyapa, jangan membalas dengan awalan sapaan. 
-- Data perusahaan yang kamu tangani adalah perusahaan dengan detail berikut:
-  ID Perusahaan: ${company.id}
-  Nama Perusahaan: ${company.name}
-  Kode Perusahaan: ${company.kode}
-  Jumlah Karyawan: ${company.employees_count_range.join("-")}
-  Alamat: ${company.address}
-  Email: ${company.email}
-  Pemilik: ${company.owner?.name || "-"}
+- Data perusahaan yang kamu tangani adalah perusahaan dengan id ${company_id}.
 - Gunakan tools yang telah disediakan untuk mengambil data yang dibutuhkan. Selalu gunakan nilai company_id saat menggunakan tool-tool yang ada. 
 - Jika kamu tidak mengetahui jawaban dari pertanyaan, jawab saja dengan "Maaf, saya belum memiliki jawaban dari pertanyaan Anda." dan jangan menjawab tanpa sumber data yang jelas.
 - Buat dirimu interaktif dalam berkomunikasi dengan menggunakan emoji sesuai dengan konteks pesan namun jangan terlalu sering menggunakan emoji. 

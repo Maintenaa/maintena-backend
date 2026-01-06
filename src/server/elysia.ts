@@ -4,9 +4,9 @@ import { Config } from "../core";
 
 import cors from "@elysiajs/cors";
 import {
-  CommonMiddleware,
-  ErrorMiddleware,
-  LoggerMiddleware,
+	CommonMiddleware,
+	ErrorMiddleware,
+	LoggerMiddleware,
 } from "../modules/common/common.middleware";
 
 import createCheckHealthRoute from "../modules/check-health/check-health.route";
@@ -22,37 +22,36 @@ import createWorkOrderRoute from "../modules/work-order/work-order.route";
 import { createChatRoute } from "../modules/chat/chat.route";
 
 export default function buildElysiaServer() {
-  return (
-    new Elysia({
-      prefix: "/api/v1",
-    })
-      // integrations
-      .use(cors({ origin: Config.CLIENT_URL.split(",") }))
-      .use(
-        openapi({
-          references: fromTypes(),
-        })
-      )
+	return (
+		new Elysia()
+			// integrations
+			.use(cors({ origin: Config.CLIENT_URL.split(",") }))
+			.use(
+				openapi({
+					references: fromTypes(),
+					path: "/docs",
+				}),
+			)
 
-      // middleware
-      .use(CommonMiddleware())
-      .use(LoggerMiddleware())
-      .use(ErrorMiddleware())
+			// middleware
+			.use(CommonMiddleware())
+			.use(LoggerMiddleware())
+			.use(ErrorMiddleware())
 
-      // routes
-      .use(createCheckHealthRoute())
-      .use(createAuthRoute())
-      .use(createProfileRoute())
-      .use(createCompanyRoute())
-      .use(createEmployeeRoute())
-      .use(createLocationRoute())
-      .use(createAssetRoute())
-      .use(createPartRoute())
-      .use(createPreventiveMaintenanceRoute())
-      .use(createWorkOrderRoute())
-      .use(createChatRoute())
+			// routes
+			.use(createCheckHealthRoute())
+			.use(createAuthRoute())
+			.use(createProfileRoute())
+			.use(createCompanyRoute())
+			.use(createEmployeeRoute())
+			.use(createLocationRoute())
+			.use(createAssetRoute())
+			.use(createPartRoute())
+			.use(createPreventiveMaintenanceRoute())
+			.use(createWorkOrderRoute())
+			.use(createChatRoute())
 
-      // run server
-      .listen(Config.APP_PORT)
-  );
+			// run server
+			.listen(Config.APP_PORT)
+	);
 }
