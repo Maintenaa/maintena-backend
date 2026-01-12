@@ -30,6 +30,21 @@ export default function buildElysiaServer() {
 				openapi({
 					references: fromTypes(),
 					path: "/docs",
+					documentation: {
+						info: {
+							title: "Maintena API",
+							description: "Maintena API Documentation",
+							version: "1.0.0",
+						},
+						components: {
+							securitySchemes: {
+								"Bearer Auth": {
+									type: "http",
+									scheme: "bearer",
+								},
+							},
+						},
+					},
 				}),
 			)
 

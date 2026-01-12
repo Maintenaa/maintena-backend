@@ -1,35 +1,28 @@
 import Elysia from "elysia";
-import { authHeaderSchema, updateProfileSchema } from "./profile.schema";
+import { updateProfileSchema } from "./profile.schema";
 import { AuthMiddleware } from "../auth/auth.middleware";
 import { updateProfile } from "./profile.service";
 
 export default function createProfileRoute() {
-  return new Elysia({ prefix: "/profile" }).use(
-    AuthMiddleware()
-      .get(
-        "/",
-        async ({ user }) => {
-          return {
-            profile: user,
-          };
-        },
-        {
-          headers: authHeaderSchema,
-        }
-      )
+	return new Elysia({ prefix: "/profile" }).use(
+		AuthMiddleware()
+			.get("/", async ({ user }) => {
+				return {
+					profile: user,
+				};
+			})
 
-      .put(
-        "/",
-        async ({ user, body }) => {
-          return updateProfile({
-            ...body,
-            id: user!.id,
-          });
-        },
-        {
-          headers: authHeaderSchema,
-          body: updateProfileSchema,
-        }
-      )
-  );
+			.put(
+				"/",
+				async ({ user, body }) => {
+					return updateProfile({
+						...body,
+						id: user!.id,
+					});
+				},
+				{
+					body: updateProfileSchema,
+				},
+			),
+	);
 }
