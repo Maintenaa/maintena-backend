@@ -75,44 +75,25 @@ The server will start on `http://localhost:3000` (or as configured).
 
 #### POST /auth/login
 
-Authenticate user and return access token.
-
-**Body:**
+**Request Body:**
 
 ```json
 {
-  "email": "user@example.com",
-  "password": "password"
+  "email": "string",
+  "password": "string"
 }
 ```
 
 #### POST /auth/register
 
-Register a new user account.
-
-**Body:**
+**Request Body:**
 
 ```json
 {
-  "email": "user@example.com",
-  "password": "password",
-  "password_confirmation": "password",
-  "name": "User Name"
-}
-```
-
-### Company
-
-#### POST /company
-
-Create a new company (requires authentication).
-
-**Body:**
-
-```json
-{
-  "name": "Company Name",
-  "description": "Company description"
+  "email": "string",
+  "password": "string",
+  "password_confirmation": "string",
+  "name": "string"
 }
 ```
 
@@ -120,18 +101,30 @@ Create a new company (requires authentication).
 
 #### GET /profile
 
-Get current user profile information.
-
 #### PUT /profile
 
-Update current user profile.
-
-**Body:**
+**Request Body:**
 
 ```json
 {
-  "name": "Updated Name",
-  "email": "newemail@example.com"
+  "name": "string",
+  "password": "string",
+  "password_confirmation": "string"
+}
+```
+
+### Company
+
+#### POST /company
+
+**Request Body:**
+
+```json
+{
+  "name": "string",
+  "employees_count_range": ["number", "number"],
+  "email": "string",
+  "address": "string"
 }
 ```
 
@@ -139,265 +132,315 @@ Update current user profile.
 
 #### GET /employee
 
-Get all employees for the company.
-
 #### POST /employee
 
-Register a new employee (company owner only).
-
-**Body:**
+**Request Body:**
 
 ```json
 {
-  "name": "Employee Name",
-  "email": "employee@example.com",
-  "password": "password",
-  "role": "technician"
+  "name": "string",
+  "email": "string",
+  "role": "string",
+  "is_admin": "boolean"
 }
 ```
 
-#### PUT /employee/:id
+#### PUT /employee/{id}
 
-Update employee information (company owner only).
+**Path Parameters:**
 
-#### DELETE /employee/:id
+- `id` (number, required)
 
-Delete an employee (company owner only).
-
-### Asset Management
-
-#### POST /asset
-
-Create a new asset.
-
-**Body:**
+**Request Body:**
 
 ```json
 {
-  "code": "ASSET001",
-  "name": "Asset Name",
-  "description": "Asset description",
-  "location_id": 1,
-  "category_id": 1
+  "role": "string",
+  "is_admin": "boolean"
 }
 ```
 
-#### GET /asset
+#### DELETE /employee/{id}
 
-Get all assets for the company.
+**Path Parameters:**
 
-#### GET /asset/:code
-
-Get specific asset by code.
-
-#### PUT /asset/:code
-
-Update asset information.
-
-#### DELETE /asset/:code
-
-Delete an asset.
+- `id` (number, required)
 
 ### Location Management
 
 #### GET /location
 
-Get all locations for the company.
-
 #### POST /location
 
-Create a new location.
-
-**Body:**
+**Request Body:**
 
 ```json
 {
-  "name": "Location Name",
-  "description": "Location description",
-  "address": "Location address"
+  "name": "string",
+  "parent_id": "number"
 }
 ```
 
-#### GET /location/:id
+#### GET /location/{id}
 
-Get specific location by ID.
+**Path Parameters:**
 
-#### PUT /location/:id
+- `id` (string, required)
 
-Update location information.
+#### PUT /location/{id}
 
-#### DELETE /location/:id
+**Path Parameters:**
 
-Delete a location.
+- `id` (string, required)
+
+**Request Body:**
+
+```json
+{
+  "name": "string",
+  "parent_id": "number"
+}
+```
+
+#### DELETE /location/{id}
+
+**Path Parameters:**
+
+- `id` (string, required)
+
+### Asset Management
+
+#### POST /asset
+
+**Request Body:**
+
+```json
+{
+  "category_id": "number",
+  "location_id": "number",
+  "name": "string"
+}
+```
+
+#### GET /asset
+
+#### GET /asset/{code}
+
+**Path Parameters:**
+
+- `code` (string, required)
+
+#### PUT /asset/{code}
+
+**Path Parameters:**
+
+- `code` (string, required)
+
+**Request Body:**
+
+```json
+{
+  "category_id": "number",
+  "location_id": "number",
+  "name": "string"
+}
+```
+
+#### DELETE /asset/{code}
+
+**Path Parameters:**
+
+- `code` (string, required)
 
 ### Parts Management
 
 #### POST /part
 
-Create a new part.
-
-**Body:**
+**Request Body:**
 
 ```json
 {
-  "code": "PART001",
-  "name": "Part Name",
-  "description": "Part description",
-  "quantity": 100,
-  "price": 50.0
+  "name": "string",
+  "quantity": "number",
+  "price": "number",
+  "location_id": "number"
 }
 ```
 
 #### GET /part
 
-Get all parts for the company.
+#### GET /part/{code}
 
-#### GET /part/:code
+**Path Parameters:**
 
-Get specific part by code.
+- `code` (string, required)
 
-#### PUT /part/:code
+#### PUT /part/{code}
 
-Update part information.
+**Path Parameters:**
 
-#### DELETE /part/:code
+- `code` (string, required)
 
-Delete a part.
+**Request Body:**
+
+```json
+{
+  "name": "string",
+  "quantity": "number",
+  "price": "number",
+  "location_id": "number"
+}
+```
+
+#### DELETE /part/{code}
+
+**Path Parameters:**
+
+- `code` (string, required)
 
 ### Preventive Maintenance
 
 #### POST /preventive-maintenance
 
-Create a preventive maintenance schedule.
-
-**Body:**
+**Request Body:**
 
 ```json
 {
-  "asset_id": 1,
-  "title": "Monthly Inspection",
-  "description": "Regular maintenance check",
-  "schedule_type": "monthly",
-  "next_due_date": "2024-02-01"
+  "frequency": "string",
+  "asset_id": "string",
+  "description": "string",
+  "last_service_at": "Date|string|number",
+  "next_service_at": "Date|string|number"
 }
 ```
 
 #### GET /preventive-maintenance
 
-Get all preventive maintenance schedules.
+#### GET /preventive-maintenance/{id}
 
-#### GET /preventive-maintenance/:id
+**Path Parameters:**
 
-Get specific preventive maintenance by ID.
+- `id` (number, required)
 
-#### PUT /preventive-maintenance/:id
+#### PUT /preventive-maintenance/{id}
 
-Update preventive maintenance schedule.
+**Path Parameters:**
 
-#### DELETE /preventive-maintenance/:id
+- `id` (number, required)
 
-Delete a preventive maintenance schedule.
+**Request Body:**
+
+```json
+{
+  "frequency": "string",
+  "asset_id": "string",
+  "description": "string",
+  "last_service_at": "Date|string|number",
+  "next_service_at": "Date|string|number"
+}
+```
+
+#### DELETE /preventive-maintenance/{id}
+
+**Path Parameters:**
+
+- `id` (number, required)
 
 ### Work Orders
 
 #### POST /work-order
 
-Create a new work order.
-
-**Body:**
+**Request Body:**
 
 ```json
 {
-  "asset_id": 1,
-  "title": "Repair Issue",
-  "description": "Fix broken component",
-  "priority": "high",
-  "due_date": "2024-01-15"
+  "asset_id": "string",
+  "description": "string",
+  "priority": "string",
+  "type": "string"
 }
 ```
 
 #### GET /work-order
 
-Get all work orders for the company.
+#### GET /work-order/{id}
 
-#### GET /work-order/:id
+**Path Parameters:**
 
-Get specific work order by ID.
+- `id` (number, required)
 
-#### PUT /work-order/:id
+#### PUT /work-order/{id}
 
-Update work order information.
+**Path Parameters:**
 
-#### PUT /work-order/:id/assign
+- `id` (number, required)
 
-Assign work order to an employee.
-
-**Body:**
+**Request Body:**
 
 ```json
 {
-  "employee_id": 2
+  "assigned_to": "number",
+  "due_at": "Date|string|number",
+  "status": "string",
+  "description": "string",
+  "priority": "string"
 }
 ```
 
-#### DELETE /work-order/:id
+#### DELETE /work-order/{id}
 
-Delete a work order.
+**Path Parameters:**
+
+- `id` (number, required)
+
+#### PUT /work-order/{id}/assign
+
+**Path Parameters:**
+
+- `id` (number, required)
+
+**Request Body:**
+
+```json
+{
+  "assigned_to": "number",
+  "due_at": "Date|string|number"
+}
+```
 
 ### Work Order Used Parts
 
-#### POST /work-order/:id/used-part
+#### POST /work-order/{id}/used-part
 
-Add a used part to a work order.
+**Path Parameters:**
 
-**Body:**
+- `id` (number, required)
 
-```json
-{
-  "part_code": "PART001",
-  "quantity": 2
-}
-```
-
-#### GET /work-order/:id/used-part
-
-Get all used parts for a work order.
-
-#### PUT /work-order/:id/used-part/:usedPartId
-
-Update used part quantity.
-
-**Body:**
+**Request Body:**
 
 ```json
 {
-  "quantity": 3
+  "part_id": "number",
+  "quantity": "number"
 }
 ```
 
-#### DELETE /work-order/:id/used-part/:usedPartId
+#### GET /work-order/{id}/used-part
 
-Remove a used part from work order.
+**Path Parameters:**
 
-### Chat
+- `id` (number, required)
 
-#### POST /chat
+#### PUT /work-order/{id}/used-part/{usedPartId}
 
-Send a message to the AI chat system for maintenance assistance.
+**Path Parameters:**
 
-**Body:**
-
-```json
-{
-  "message": "How do I fix a broken pump?"
-}
-```
+- `id` (number, required)
+- `usedPartId` (number, required)
 
 ### Health Check
 
 #### GET /check-health
-
-Check API health status.
 
 ## Database Schema
 
