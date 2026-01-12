@@ -1,0 +1,2125 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Maintena API",
+    "description": "Maintena API Documentation",
+    "version": "1.0.0"
+  },
+  "components": {
+    "securitySchemes": {
+      "Bearer Auth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {}
+  },
+  "paths": {
+    "/check-health/": {
+      "get": {
+        "operationId": "getCheck-health"
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "format": "email",
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password"
+                ]
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "format": "email",
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password"
+                ]
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "format": "email",
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "postAuthLogin"
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "format": "email",
+                    "type": "string"
+                  },
+                  "password": {
+                    "minLength": 8,
+                    "type": "string"
+                  },
+                  "password_confirmation": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password",
+                  "password_confirmation",
+                  "name"
+                ]
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "format": "email",
+                    "type": "string"
+                  },
+                  "password": {
+                    "minLength": 8,
+                    "type": "string"
+                  },
+                  "password_confirmation": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password",
+                  "password_confirmation",
+                  "name"
+                ]
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "format": "email",
+                    "type": "string"
+                  },
+                  "password": {
+                    "minLength": 8,
+                    "type": "string"
+                  },
+                  "password_confirmation": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password",
+                  "password_confirmation",
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "postAuthRegister"
+      }
+    },
+    "/profile/": {
+      "get": {
+        "operationId": "getProfile"
+      },
+      "put": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "minLength": 8,
+                    "type": "string"
+                  },
+                  "password_confirmation": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "minLength": 8,
+                    "type": "string"
+                  },
+                  "password_confirmation": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "minLength": 8,
+                    "type": "string"
+                  },
+                  "password_confirmation": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "putProfile"
+      }
+    },
+    "/company/": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "employees_count_range": {
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "employees_count_range",
+                  "email",
+                  "address"
+                ]
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "employees_count_range": {
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "employees_count_range",
+                  "email",
+                  "address"
+                ]
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "employees_count_range": {
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "employees_count_range",
+                  "email",
+                  "address"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "postCompany"
+      }
+    },
+    "/employee/": {
+      "get": {
+        "operationId": "getEmployee"
+      },
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "minLength": 5,
+                    "type": "string"
+                  },
+                  "email": {
+                    "format": "email",
+                    "type": "string"
+                  },
+                  "role": {
+                    "type": "string",
+                    "enum": [
+                      "owner",
+                      "admin",
+                      "leader",
+                      "manager",
+                      "supervisor",
+                      "member",
+                      "worker"
+                    ]
+                  },
+                  "is_admin": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "name",
+                  "email",
+                  "role"
+                ]
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "minLength": 5,
+                    "type": "string"
+                  },
+                  "email": {
+                    "format": "email",
+                    "type": "string"
+                  },
+                  "role": {
+                    "type": "string",
+                    "enum": [
+                      "owner",
+                      "admin",
+                      "leader",
+                      "manager",
+                      "supervisor",
+                      "member",
+                      "worker"
+                    ]
+                  },
+                  "is_admin": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "name",
+                  "email",
+                  "role"
+                ]
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "minLength": 5,
+                    "type": "string"
+                  },
+                  "email": {
+                    "format": "email",
+                    "type": "string"
+                  },
+                  "role": {
+                    "type": "string",
+                    "enum": [
+                      "owner",
+                      "admin",
+                      "leader",
+                      "manager",
+                      "supervisor",
+                      "member",
+                      "worker"
+                    ]
+                  },
+                  "is_admin": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "name",
+                  "email",
+                  "role"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "postEmployee"
+      }
+    },
+    "/employee/{id}": {
+      "put": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "role": {
+                    "type": "string"
+                  },
+                  "is_admin": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "role"
+                ]
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "role": {
+                    "type": "string"
+                  },
+                  "is_admin": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "role"
+                ]
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "role": {
+                    "type": "string"
+                  },
+                  "is_admin": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "role"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "putEmployeeById"
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "deleteEmployeeById"
+      }
+    },
+    "/location/": {
+      "get": {
+        "operationId": "getLocation"
+      },
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "parent_id": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "parent_id": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "parent_id": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "postLocation"
+      }
+    },
+    "/location/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "getLocationById"
+      },
+      "put": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "parent_id": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "parent_id": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "parent_id": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "putLocationById"
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "deleteLocationById"
+      }
+    },
+    "/asset/": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "category_id": {
+                    "type": "number"
+                  },
+                  "location_id": {
+                    "type": "number"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "category_id",
+                  "location_id",
+                  "name"
+                ]
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "category_id": {
+                    "type": "number"
+                  },
+                  "location_id": {
+                    "type": "number"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "category_id",
+                  "location_id",
+                  "name"
+                ]
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "category_id": {
+                    "type": "number"
+                  },
+                  "location_id": {
+                    "type": "number"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "category_id",
+                  "location_id",
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "postAsset"
+      },
+      "get": {
+        "operationId": "getAsset"
+      }
+    },
+    "/asset/{code}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "getAssetByCode"
+      },
+      "put": {
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "category_id": {
+                    "type": "number"
+                  },
+                  "location_id": {
+                    "type": "number"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "category_id": {
+                    "type": "number"
+                  },
+                  "location_id": {
+                    "type": "number"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "category_id": {
+                    "type": "number"
+                  },
+                  "location_id": {
+                    "type": "number"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "putAssetByCode"
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "deleteAssetByCode"
+      }
+    },
+    "/part/": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "quantity": {
+                    "type": "number"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "location_id": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "name",
+                  "quantity",
+                  "price",
+                  "location_id"
+                ]
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "quantity": {
+                    "type": "number"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "location_id": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "name",
+                  "quantity",
+                  "price",
+                  "location_id"
+                ]
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "quantity": {
+                    "type": "number"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "location_id": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "name",
+                  "quantity",
+                  "price",
+                  "location_id"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "postPart"
+      },
+      "get": {
+        "operationId": "getPart"
+      }
+    },
+    "/part/{code}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "getPartByCode"
+      },
+      "put": {
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "quantity": {
+                    "type": "number"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "location_id": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "quantity": {
+                    "type": "number"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "location_id": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "quantity": {
+                    "type": "number"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "location_id": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "putPartByCode"
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "deletePartByCode"
+      }
+    },
+    "/preventive-maintenance/": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "frequency": {
+                    "type": "string",
+                    "enum": [
+                      "daily",
+                      "weekly",
+                      "monthly",
+                      "yearly"
+                    ]
+                  },
+                  "asset_id": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "last_service_at": {
+                    "anyOf": [
+                      {
+                        "type": "Date"
+                      },
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "format": "date",
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  "next_service_at": {
+                    "anyOf": [
+                      {
+                        "type": "Date"
+                      },
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "format": "date",
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "frequency",
+                  "asset_id",
+                  "description"
+                ]
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "frequency": {
+                    "type": "string",
+                    "enum": [
+                      "daily",
+                      "weekly",
+                      "monthly",
+                      "yearly"
+                    ]
+                  },
+                  "asset_id": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "last_service_at": {
+                    "anyOf": [
+                      {
+                        "type": "Date"
+                      },
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "format": "date",
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  "next_service_at": {
+                    "anyOf": [
+                      {
+                        "type": "Date"
+                      },
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "format": "date",
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "frequency",
+                  "asset_id",
+                  "description"
+                ]
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "frequency": {
+                    "type": "string",
+                    "enum": [
+                      "daily",
+                      "weekly",
+                      "monthly",
+                      "yearly"
+                    ]
+                  },
+                  "asset_id": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "last_service_at": {
+                    "anyOf": [
+                      {
+                        "type": "Date"
+                      },
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "format": "date",
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  "next_service_at": {
+                    "anyOf": [
+                      {
+                        "type": "Date"
+                      },
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "format": "date",
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "frequency",
+                  "asset_id",
+                  "description"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "postPreventive-maintenance"
+      },
+      "get": {
+        "operationId": "getPreventive-maintenance"
+      }
+    },
+    "/preventive-maintenance/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "getPreventive-maintenanceById"
+      },
+      "put": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "frequency": {
+                    "type": "string",
+                    "enum": [
+                      "daily",
+                      "weekly",
+                      "monthly",
+                      "yearly"
+                    ]
+                  },
+                  "asset_id": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "last_service_at": {
+                    "anyOf": [
+                      {
+                        "type": "Date"
+                      },
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "format": "date",
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  "next_service_at": {
+                    "anyOf": [
+                      {
+                        "type": "Date"
+                      },
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "format": "date",
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "frequency"
+                ]
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "frequency": {
+                    "type": "string",
+                    "enum": [
+                      "daily",
+                      "weekly",
+                      "monthly",
+                      "yearly"
+                    ]
+                  },
+                  "asset_id": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "last_service_at": {
+                    "anyOf": [
+                      {
+                        "type": "Date"
+                      },
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "format": "date",
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  "next_service_at": {
+                    "anyOf": [
+                      {
+                        "type": "Date"
+                      },
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "format": "date",
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "frequency"
+                ]
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "frequency": {
+                    "type": "string",
+                    "enum": [
+                      "daily",
+                      "weekly",
+                      "monthly",
+                      "yearly"
+                    ]
+                  },
+                  "asset_id": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "last_service_at": {
+                    "anyOf": [
+                      {
+                        "type": "Date"
+                      },
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "format": "date",
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  "next_service_at": {
+                    "anyOf": [
+                      {
+                        "type": "Date"
+                      },
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "format": "date",
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "frequency"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "putPreventive-maintenanceById"
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "deletePreventive-maintenanceById"
+      }
+    },
+    "/work-order/": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "asset_id": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "priority": {
+                    "type": "string",
+                    "enum": [
+                      "low",
+                      "medium",
+                      "high"
+                    ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "preventive",
+                      "corrective"
+                    ]
+                  }
+                },
+                "required": [
+                  "asset_id",
+                  "description"
+                ]
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "asset_id": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "priority": {
+                    "type": "string",
+                    "enum": [
+                      "low",
+                      "medium",
+                      "high"
+                    ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "preventive",
+                      "corrective"
+                    ]
+                  }
+                },
+                "required": [
+                  "asset_id",
+                  "description"
+                ]
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "asset_id": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "priority": {
+                    "type": "string",
+                    "enum": [
+                      "low",
+                      "medium",
+                      "high"
+                    ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "preventive",
+                      "corrective"
+                    ]
+                  }
+                },
+                "required": [
+                  "asset_id",
+                  "description"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "postWork-order"
+      },
+      "get": {
+        "operationId": "getWork-order"
+      }
+    },
+    "/work-order/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "getWork-orderById"
+      },
+      "put": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "assigned_to": {
+                    "type": "number"
+                  },
+                  "due_at": {
+                    "anyOf": [
+                      {
+                        "type": "Date"
+                      },
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "format": "date",
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "pending",
+                      "progress",
+                      "completed",
+                      "failed"
+                    ]
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "priority": {
+                    "type": "string",
+                    "enum": [
+                      "low",
+                      "medium",
+                      "high"
+                    ]
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "assigned_to": {
+                    "type": "number"
+                  },
+                  "due_at": {
+                    "anyOf": [
+                      {
+                        "type": "Date"
+                      },
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "format": "date",
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "pending",
+                      "progress",
+                      "completed",
+                      "failed"
+                    ]
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "priority": {
+                    "type": "string",
+                    "enum": [
+                      "low",
+                      "medium",
+                      "high"
+                    ]
+                  }
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "assigned_to": {
+                    "type": "number"
+                  },
+                  "due_at": {
+                    "anyOf": [
+                      {
+                        "type": "Date"
+                      },
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "format": "date",
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "pending",
+                      "progress",
+                      "completed",
+                      "failed"
+                    ]
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "priority": {
+                    "type": "string",
+                    "enum": [
+                      "low",
+                      "medium",
+                      "high"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "putWork-orderById"
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "deleteWork-orderById"
+      }
+    },
+    "/work-order/{id}/assign": {
+      "put": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "assigned_to": {
+                    "type": "number"
+                  },
+                  "due_at": {
+                    "anyOf": [
+                      {
+                        "type": "Date"
+                      },
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "format": "date",
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "assigned_to",
+                  "due_at"
+                ]
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "assigned_to": {
+                    "type": "number"
+                  },
+                  "due_at": {
+                    "anyOf": [
+                      {
+                        "type": "Date"
+                      },
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "format": "date",
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "assigned_to",
+                  "due_at"
+                ]
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "assigned_to": {
+                    "type": "number"
+                  },
+                  "due_at": {
+                    "anyOf": [
+                      {
+                        "type": "Date"
+                      },
+                      {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      {
+                        "format": "date",
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "assigned_to",
+                  "due_at"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "putWork-orderByIdAssign"
+      }
+    },
+    "/work-order/{id}/used-part/": {
+      "post": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "part_id": {
+                    "type": "number"
+                  },
+                  "quantity": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "part_id",
+                  "quantity"
+                ]
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "part_id": {
+                    "type": "number"
+                  },
+                  "quantity": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "part_id",
+                  "quantity"
+                ]
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "part_id": {
+                    "type": "number"
+                  },
+                  "quantity": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "part_id",
+                  "quantity"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "postWork-orderByIdUsed-part"
+      },
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "getWork-orderByIdUsed-part"
+      }
+    },
+    "/work-order/{id}/used-part/{usedPartId}/": {
+      "put": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "usedPartId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "quantity": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "quantity": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "quantity": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "putWork-orderByIdUsed-partByUsedPartId"
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "usedPartId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "deleteWork-orderByIdUsed-partByUsedPartId"
+      }
+    },
+    "/chat/": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "message"
+                ]
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "message"
+                ]
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "message"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "postChat"
+      }
+    }
+  }
+}
