@@ -1,57 +1,57 @@
 import Elysia from "elysia";
 import {
-  CompanyMiddleware,
-  IsCompanyOwnerMiddleware,
+	CompanyMiddleware,
+	IsCompanyOwnerMiddleware,
 } from "../company/company.middleware";
 import {
-  registerEmployeeSchema,
-  updateEmployeeSchema,
+	registerEmployeeSchema,
+	updateEmployeeSchema,
 } from "./employee.schema";
 import {
-  deleteEmployee,
-  getEmployees,
-  registerEmployee,
-  updateEmployee,
+	deleteEmployee,
+	getEmployees,
+	registerEmployee,
+	updateEmployee,
 } from "./employee.service";
 import { paramsId } from "../common/common.schema";
 
 export default function createEmployeeRoute() {
-  return new Elysia({ prefix: "/employee" }).use(
-    CompanyMiddleware()
-      .get("/", ({ company }) => {
-        return getEmployees({ company_id: company.id });
-      })
+	return new Elysia({ prefix: "/employee", tags: ["Employee"] }).use(
+		CompanyMiddleware()
+			.get("/", ({ company }) => {
+				return getEmployees({ company_id: company.id });
+			})
 
-      .use(
-        IsCompanyOwnerMiddleware()
-          .post(
-            "/",
-            ({ body, company }) => {
-              return registerEmployee({
-                ...body,
-                company_id: company.id,
-              });
-            },
-            {
-              body: registerEmployeeSchema,
-            }
-          )
-          .put(
-            "/:id",
-            ({ body, params }) => {
-              return updateEmployee(params.id, body);
-            },
-            { params: paramsId, body: updateEmployeeSchema }
-          )
-          .delete(
-            "/:id",
-            ({ params }) => {
-              return deleteEmployee(params.id);
-            },
-            {
-              params: paramsId,
-            }
-          )
-      )
-  );
+			.use(
+				IsCompanyOwnerMiddleware()
+					.post(
+						"/",
+						({ body, company }) => {
+							return registerEmployee({
+								...body,
+								company_id: company.id,
+							});
+						},
+						{
+							body: registerEmployeeSchema,
+						},
+					)
+					.put(
+						"/:id",
+						({ body, params }) => {
+							return updateEmployee(params.id, body);
+						},
+						{ params: paramsId, body: updateEmployeeSchema },
+					)
+					.delete(
+						"/:id",
+						({ params }) => {
+							return deleteEmployee(params.id);
+						},
+						{
+							params: paramsId,
+						},
+					),
+			),
+	);
 }

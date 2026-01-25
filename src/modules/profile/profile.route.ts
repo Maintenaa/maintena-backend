@@ -4,7 +4,7 @@ import { AuthMiddleware } from "../auth/auth.middleware";
 import { updateProfile } from "./profile.service";
 
 export default function createProfileRoute() {
-	return new Elysia({ prefix: "/profile" }).use(
+	return new Elysia({ prefix: "/profile", tags: ["Profile"] }).use(
 		AuthMiddleware()
 			.get("/", async ({ user }) => {
 				return {

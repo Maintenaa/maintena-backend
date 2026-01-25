@@ -6,6 +6,7 @@ import { createChat } from "./chat.service";
 export function createChatRoute() {
 	return new Elysia({
 		prefix: "/chat",
+		tags: ["Chat"],
 	}).use(
 		CompanyMiddleware().post(
 			"/",

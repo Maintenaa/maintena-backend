@@ -5,6 +5,7 @@ import { loginSchema, registerSchema } from "./auth.schema";
 export default function createAuthRoute() {
 	const app = new Elysia({
 		prefix: "/auth",
+		tags: ["Auth"],
 	})
 
 		.post(
