@@ -11,7 +11,7 @@ export const getCompanyTool = tool(
 		}
 
 		return `## Perusahaan
-Kode Perusahaan: ${company.kode}
+Kode Perusahaan: ${company.code}
 Nama Perusahaan: ${company.name}
 Total Karyawan: ${company.employees_count_range.join("-")}
 Email: ${company.email}

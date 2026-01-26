@@ -8,7 +8,7 @@ export const getAssetsTool = tool(
 		let text = "Aset di perusahaan adalah: \n";
 		text += result
 			.map((a) => {
-				return `- ${a.name} (Kode: ${a.code}) di lokasi ${a.location?.name || "Tidak diketahui"}`;
+				return `- ${a.name} (Code: ${a.code}) di lokasi ${a.location?.name || "Tidak diketahui"}`;
 			})
 			.join("\n");
 

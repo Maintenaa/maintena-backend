@@ -8,7 +8,7 @@ export const getPartsTool = tool(
 		let text = "Part di perusahaan adalah: \n";
 		text += result
 			.map((p) => {
-				return `- ${p.name} (Kode: ${p.code}) di lokasi ${p.location?.name || "Tidak diketahui"}`;
+				return `- ${p.name} (Code: ${p.code}) di lokasi ${p.location?.name || "Tidak diketahui"}`;
 			})
 			.join("\n");
 

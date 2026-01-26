@@ -14,7 +14,7 @@ interface CreateCompany extends Static<typeof createCompanySchema> {
 export async function createCompany(body: CreateCompany) {
 	const company = await companyRepo.save({
 		...body,
-		kode: uuidv4(),
+		code: uuidv4(),
 	});
 
 	await createEmployee({
