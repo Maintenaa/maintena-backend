@@ -2,10 +2,11 @@ import { dataSource } from "../../database/data-source";
 import { Company, Employee } from "../../database/entities";
 import { createError } from "../common/common.service";
 import { AuthMiddleware } from "../auth/auth.middleware";
-import z from "zod";
+import type { MiddlewareProps } from "../common/common.middleware";
+import { SecurityScheme } from "../../constant";
 
-export function CompanyMiddleware() {
-	return AuthMiddleware()
+export function CompanyMiddleware(props?: MiddlewareProps) {
+	return AuthMiddleware({ security: { [SecurityScheme.CompanyAuth]: [] } })
 		.derive(async ({ headers, company: oldCompany }: any) => {
 			if (oldCompany) {
 				return {

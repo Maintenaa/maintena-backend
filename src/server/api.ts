@@ -20,6 +20,7 @@ import createPartRoute from "../modules/part/part.route";
 import createPreventiveMaintenanceRoute from "../modules/preventive-maintenance/preventive-maintenance.route";
 import createWorkOrderRoute from "../modules/work-order/work-order.route";
 import { createChatRoute } from "../modules/chat/chat.route";
+import { SecurityScheme } from "../constant";
 
 export default function buildElysiaServer() {
 	return (
@@ -38,9 +39,14 @@ export default function buildElysiaServer() {
 						},
 						components: {
 							securitySchemes: {
-								"Bearer Auth": {
+								[SecurityScheme.BearerAuth]: {
 									type: "http",
 									scheme: "bearer",
+								},
+								[SecurityScheme.CompanyAuth]: {
+									type: "apiKey",
+									in: "header",
+									name: "Company-Code",
 								},
 							},
 						},
