@@ -8,36 +8,36 @@ import { v4 as uuidv4 } from "uuid";
 const companyRepo = dataSource.getRepository(Company);
 
 interface CreateCompany extends Static<typeof createCompanySchema> {
-	owner: User;
+  owner: User;
 }
 
 export async function createCompany(body: CreateCompany) {
-	const company = await companyRepo.save({
-		...body,
-		code: uuidv4(),
-	});
+  const company = await companyRepo.save({
+    ...body,
+    code: uuidv4(),
+  });
 
-	await createEmployee({
-		user_id: body.owner.id,
-		role: EmployeeRole.OWNER,
-		company_id: company.id,
-		is_owner: true,
-	});
+  await createEmployee({
+    user_id: body.owner.id,
+    role: EmployeeRole.OWNER,
+    company_id: company.id,
+    is_owner: true,
+  });
 
-	return {
-		message: "Berhasil membuat perusahaan",
-		company,
-	};
+  return {
+    message: "Berhasil membuat perusahaan",
+    company,
+  };
 }
 
 export async function getCompany(id: number) {
-	const company = await companyRepo.findOne({
-		where: { id },
-		relations: { owner: true },
-	});
+  const company = await companyRepo.findOne({
+    where: { id },
+    relations: { owner: true },
+  });
 
-	return {
-		message: "Berhasil mendapatkan perusahaan",
-		company,
-	};
+  return {
+    message: "Berhasil mendapatkan perusahaan",
+    company,
+  };
 }

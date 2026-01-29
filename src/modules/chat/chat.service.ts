@@ -5,18 +5,18 @@ import type { User } from "../../database/entities";
 import { stream_handler } from "../../lib/llm_handler";
 
 export async function* createChat({
-	message,
-	company_id,
-	user,
+  message,
+  company_id,
+  user,
 }: Static<typeof createChatSchema> & {
-	company_id: number;
-	user?: User;
+  company_id: number;
+  user?: User;
 }) {
-	const agent = await createChatAgent({ company_id, user });
+  const agent = await createChatAgent({ company_id, user });
 
-	const handler = agent.runStream(message);
+  const handler = agent.runStream(message);
 
-	for await (const chunk of stream_handler(handler)) {
-		yield sse(JSON.stringify(chunk));
-	}
+  for await (const chunk of stream_handler(handler)) {
+    yield sse(JSON.stringify(chunk));
+  }
 }

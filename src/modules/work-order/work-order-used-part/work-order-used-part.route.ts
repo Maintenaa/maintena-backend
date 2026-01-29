@@ -30,6 +30,9 @@ export function createWorkOrderUsedPartRoute() {
         {
           body: addUsedPartSchema,
           params: paramsId,
+          detail: {
+            summary: "Work Order - Add Used Part To Work Order",
+          },
         }
       )
       .get(
@@ -39,6 +42,9 @@ export function createWorkOrderUsedPartRoute() {
         },
         {
           params: paramsId,
+          detail: {
+            summary: "Work Order - Get Used Parts From Work Order",
+          },
         }
       )
       .put(
@@ -49,6 +55,9 @@ export function createWorkOrderUsedPartRoute() {
         {
           body: updateUsedPartSchema,
           params: paramsUsedPartId,
+          detail: {
+            summary: "Work Order - Update Used Part From Work Order",
+          },
         }
       )
       .delete(
@@ -58,6 +67,9 @@ export function createWorkOrderUsedPartRoute() {
         },
         {
           params: paramsUsedPartId,
+          detail: {
+            summary: "Work Order - Delete Used Part From Work Order",
+          },
         }
       )
   );

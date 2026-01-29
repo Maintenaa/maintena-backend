@@ -37,10 +37,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "email",
-                  "password"
-                ]
+                "required": ["email", "password"]
               }
             },
             "application/x-www-form-urlencoded": {
@@ -55,10 +52,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "email",
-                  "password"
-                ]
+                "required": ["email", "password"]
               }
             },
             "multipart/form-data": {
@@ -73,10 +67,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "email",
-                  "password"
-                ]
+                "required": ["email", "password"]
               }
             }
           }
@@ -198,9 +189,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "name"
-                ]
+                "required": ["name"]
               }
             },
             "application/x-www-form-urlencoded": {
@@ -218,9 +207,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "name"
-                ]
+                "required": ["name"]
               }
             },
             "multipart/form-data": {
@@ -238,9 +225,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "name"
-                ]
+                "required": ["name"]
               }
             }
           }
@@ -384,11 +369,7 @@
                     "type": "boolean"
                   }
                 },
-                "required": [
-                  "name",
-                  "email",
-                  "role"
-                ]
+                "required": ["name", "email", "role"]
               }
             },
             "application/x-www-form-urlencoded": {
@@ -419,11 +400,7 @@
                     "type": "boolean"
                   }
                 },
-                "required": [
-                  "name",
-                  "email",
-                  "role"
-                ]
+                "required": ["name", "email", "role"]
               }
             },
             "multipart/form-data": {
@@ -454,11 +431,7 @@
                     "type": "boolean"
                   }
                 },
-                "required": [
-                  "name",
-                  "email",
-                  "role"
-                ]
+                "required": ["name", "email", "role"]
               }
             }
           }
@@ -492,9 +465,7 @@
                     "type": "boolean"
                   }
                 },
-                "required": [
-                  "role"
-                ]
+                "required": ["role"]
               }
             },
             "application/x-www-form-urlencoded": {
@@ -508,9 +479,7 @@
                     "type": "boolean"
                   }
                 },
-                "required": [
-                  "role"
-                ]
+                "required": ["role"]
               }
             },
             "multipart/form-data": {
@@ -524,9 +493,7 @@
                     "type": "boolean"
                   }
                 },
-                "required": [
-                  "role"
-                ]
+                "required": ["role"]
               }
             }
           }
@@ -566,9 +533,7 @@
                     "type": "number"
                   }
                 },
-                "required": [
-                  "name"
-                ]
+                "required": ["name"]
               }
             },
             "application/x-www-form-urlencoded": {
@@ -582,9 +547,7 @@
                     "type": "number"
                   }
                 },
-                "required": [
-                  "name"
-                ]
+                "required": ["name"]
               }
             },
             "multipart/form-data": {
@@ -598,9 +561,7 @@
                     "type": "number"
                   }
                 },
-                "required": [
-                  "name"
-                ]
+                "required": ["name"]
               }
             }
           }
@@ -647,9 +608,7 @@
                     "type": "number"
                   }
                 },
-                "required": [
-                  "name"
-                ]
+                "required": ["name"]
               }
             },
             "application/x-www-form-urlencoded": {
@@ -663,9 +622,7 @@
                     "type": "number"
                   }
                 },
-                "required": [
-                  "name"
-                ]
+                "required": ["name"]
               }
             },
             "multipart/form-data": {
@@ -679,9 +636,7 @@
                     "type": "number"
                   }
                 },
-                "required": [
-                  "name"
-                ]
+                "required": ["name"]
               }
             }
           }
@@ -721,11 +676,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "category_id",
-                  "location_id",
-                  "name"
-                ]
+                "required": ["category_id", "location_id", "name"]
               }
             },
             "application/x-www-form-urlencoded": {
@@ -742,11 +693,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "category_id",
-                  "location_id",
-                  "name"
-                ]
+                "required": ["category_id", "location_id", "name"]
               }
             },
             "multipart/form-data": {
@@ -763,11 +710,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "category_id",
-                  "location_id",
-                  "name"
-                ]
+                "required": ["category_id", "location_id", "name"]
               }
             }
           }
@@ -894,12 +837,7 @@
                     "type": "number"
                   }
                 },
-                "required": [
-                  "name",
-                  "quantity",
-                  "price",
-                  "location_id"
-                ]
+                "required": ["name", "quantity", "price", "location_id"]
               }
             },
             "application/x-www-form-urlencoded": {
@@ -919,12 +857,7 @@
                     "type": "number"
                   }
                 },
-                "required": [
-                  "name",
-                  "quantity",
-                  "price",
-                  "location_id"
-                ]
+                "required": ["name", "quantity", "price", "location_id"]
               }
             },
             "multipart/form-data": {
@@ -944,12 +877,7 @@
                     "type": "number"
                   }
                 },
-                "required": [
-                  "name",
-                  "quantity",
-                  "price",
-                  "location_id"
-                ]
+                "required": ["name", "quantity", "price", "location_id"]
               }
             }
           }
@@ -1074,12 +1002,7 @@
                 "properties": {
                   "frequency": {
                     "type": "string",
-                    "enum": [
-                      "daily",
-                      "weekly",
-                      "monthly",
-                      "yearly"
-                    ]
+                    "enum": ["daily", "weekly", "monthly", "yearly"]
                   },
                   "asset_id": {
                     "type": "string"
@@ -1124,11 +1047,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "frequency",
-                  "asset_id",
-                  "description"
-                ]
+                "required": ["frequency", "asset_id", "description"]
               }
             },
             "application/x-www-form-urlencoded": {
@@ -1137,12 +1056,7 @@
                 "properties": {
                   "frequency": {
                     "type": "string",
-                    "enum": [
-                      "daily",
-                      "weekly",
-                      "monthly",
-                      "yearly"
-                    ]
+                    "enum": ["daily", "weekly", "monthly", "yearly"]
                   },
                   "asset_id": {
                     "type": "string"
@@ -1187,11 +1101,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "frequency",
-                  "asset_id",
-                  "description"
-                ]
+                "required": ["frequency", "asset_id", "description"]
               }
             },
             "multipart/form-data": {
@@ -1200,12 +1110,7 @@
                 "properties": {
                   "frequency": {
                     "type": "string",
-                    "enum": [
-                      "daily",
-                      "weekly",
-                      "monthly",
-                      "yearly"
-                    ]
+                    "enum": ["daily", "weekly", "monthly", "yearly"]
                   },
                   "asset_id": {
                     "type": "string"
@@ -1250,11 +1155,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "frequency",
-                  "asset_id",
-                  "description"
-                ]
+                "required": ["frequency", "asset_id", "description"]
               }
             }
           }
@@ -1299,12 +1200,7 @@
                 "properties": {
                   "frequency": {
                     "type": "string",
-                    "enum": [
-                      "daily",
-                      "weekly",
-                      "monthly",
-                      "yearly"
-                    ]
+                    "enum": ["daily", "weekly", "monthly", "yearly"]
                   },
                   "asset_id": {
                     "type": "string"
@@ -1349,9 +1245,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "frequency"
-                ]
+                "required": ["frequency"]
               }
             },
             "application/x-www-form-urlencoded": {
@@ -1360,12 +1254,7 @@
                 "properties": {
                   "frequency": {
                     "type": "string",
-                    "enum": [
-                      "daily",
-                      "weekly",
-                      "monthly",
-                      "yearly"
-                    ]
+                    "enum": ["daily", "weekly", "monthly", "yearly"]
                   },
                   "asset_id": {
                     "type": "string"
@@ -1410,9 +1299,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "frequency"
-                ]
+                "required": ["frequency"]
               }
             },
             "multipart/form-data": {
@@ -1421,12 +1308,7 @@
                 "properties": {
                   "frequency": {
                     "type": "string",
-                    "enum": [
-                      "daily",
-                      "weekly",
-                      "monthly",
-                      "yearly"
-                    ]
+                    "enum": ["daily", "weekly", "monthly", "yearly"]
                   },
                   "asset_id": {
                     "type": "string"
@@ -1471,9 +1353,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "frequency"
-                ]
+                "required": ["frequency"]
               }
             }
           }
@@ -1511,24 +1391,14 @@
                   },
                   "priority": {
                     "type": "string",
-                    "enum": [
-                      "low",
-                      "medium",
-                      "high"
-                    ]
+                    "enum": ["low", "medium", "high"]
                   },
                   "type": {
                     "type": "string",
-                    "enum": [
-                      "preventive",
-                      "corrective"
-                    ]
+                    "enum": ["preventive", "corrective"]
                   }
                 },
-                "required": [
-                  "asset_id",
-                  "description"
-                ]
+                "required": ["asset_id", "description"]
               }
             },
             "application/x-www-form-urlencoded": {
@@ -1543,24 +1413,14 @@
                   },
                   "priority": {
                     "type": "string",
-                    "enum": [
-                      "low",
-                      "medium",
-                      "high"
-                    ]
+                    "enum": ["low", "medium", "high"]
                   },
                   "type": {
                     "type": "string",
-                    "enum": [
-                      "preventive",
-                      "corrective"
-                    ]
+                    "enum": ["preventive", "corrective"]
                   }
                 },
-                "required": [
-                  "asset_id",
-                  "description"
-                ]
+                "required": ["asset_id", "description"]
               }
             },
             "multipart/form-data": {
@@ -1575,24 +1435,14 @@
                   },
                   "priority": {
                     "type": "string",
-                    "enum": [
-                      "low",
-                      "medium",
-                      "high"
-                    ]
+                    "enum": ["low", "medium", "high"]
                   },
                   "type": {
                     "type": "string",
-                    "enum": [
-                      "preventive",
-                      "corrective"
-                    ]
+                    "enum": ["preventive", "corrective"]
                   }
                 },
-                "required": [
-                  "asset_id",
-                  "description"
-                ]
+                "required": ["asset_id", "description"]
               }
             }
           }
@@ -1658,23 +1508,14 @@
                   },
                   "status": {
                     "type": "string",
-                    "enum": [
-                      "pending",
-                      "progress",
-                      "completed",
-                      "failed"
-                    ]
+                    "enum": ["pending", "progress", "completed", "failed"]
                   },
                   "description": {
                     "type": "string"
                   },
                   "priority": {
                     "type": "string",
-                    "enum": [
-                      "low",
-                      "medium",
-                      "high"
-                    ]
+                    "enum": ["low", "medium", "high"]
                   }
                 }
               }
@@ -1706,23 +1547,14 @@
                   },
                   "status": {
                     "type": "string",
-                    "enum": [
-                      "pending",
-                      "progress",
-                      "completed",
-                      "failed"
-                    ]
+                    "enum": ["pending", "progress", "completed", "failed"]
                   },
                   "description": {
                     "type": "string"
                   },
                   "priority": {
                     "type": "string",
-                    "enum": [
-                      "low",
-                      "medium",
-                      "high"
-                    ]
+                    "enum": ["low", "medium", "high"]
                   }
                 }
               }
@@ -1754,23 +1586,14 @@
                   },
                   "status": {
                     "type": "string",
-                    "enum": [
-                      "pending",
-                      "progress",
-                      "completed",
-                      "failed"
-                    ]
+                    "enum": ["pending", "progress", "completed", "failed"]
                   },
                   "description": {
                     "type": "string"
                   },
                   "priority": {
                     "type": "string",
-                    "enum": [
-                      "low",
-                      "medium",
-                      "high"
-                    ]
+                    "enum": ["low", "medium", "high"]
                   }
                 }
               }
@@ -1834,10 +1657,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "assigned_to",
-                  "due_at"
-                ]
+                "required": ["assigned_to", "due_at"]
               }
             },
             "application/x-www-form-urlencoded": {
@@ -1866,10 +1686,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "assigned_to",
-                  "due_at"
-                ]
+                "required": ["assigned_to", "due_at"]
               }
             },
             "multipart/form-data": {
@@ -1898,10 +1715,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "assigned_to",
-                  "due_at"
-                ]
+                "required": ["assigned_to", "due_at"]
               }
             }
           }
@@ -1935,10 +1749,7 @@
                     "type": "number"
                   }
                 },
-                "required": [
-                  "part_id",
-                  "quantity"
-                ]
+                "required": ["part_id", "quantity"]
               }
             },
             "application/x-www-form-urlencoded": {
@@ -1952,10 +1763,7 @@
                     "type": "number"
                   }
                 },
-                "required": [
-                  "part_id",
-                  "quantity"
-                ]
+                "required": ["part_id", "quantity"]
               }
             },
             "multipart/form-data": {
@@ -1969,10 +1777,7 @@
                     "type": "number"
                   }
                 },
-                "required": [
-                  "part_id",
-                  "quantity"
-                ]
+                "required": ["part_id", "quantity"]
               }
             }
           }
@@ -2085,9 +1890,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "message"
-                ]
+                "required": ["message"]
               }
             },
             "application/x-www-form-urlencoded": {
@@ -2098,9 +1901,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "message"
-                ]
+                "required": ["message"]
               }
             },
             "multipart/form-data": {
@@ -2111,9 +1912,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "message"
-                ]
+                "required": ["message"]
               }
             }
           }

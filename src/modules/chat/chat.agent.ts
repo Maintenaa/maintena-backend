@@ -10,24 +10,24 @@ import type { User } from "../../database/entities";
 import { getCompanyTool } from "../../llm/tools/get-company.tool";
 
 export async function createChatAgent(props: {
-	company_id: number;
-	user?: User;
+  company_id: number;
+  user?: User;
 }) {
-	const { company_id, user } = props;
+  const { company_id, user } = props;
 
-	return agent({
-		llm,
-		name: "chat_agent",
-		tools: [
-			getCompanyTool,
-			getEmployeTool,
-			getPartsTool,
-			getAssetsTool,
-			getLocationsTool,
-			getWorkOrderTool,
-			getPreventiveMaintenanceTool,
-		],
-		systemPrompt: `Kamu bernama AI Maintena. Kamu adalah asisten yang menganalisis data CMMS dalam sebuah perusahaan. Kamu harus menjawab tiap pertanyaan berdasarkan ketentuan berikut:
+  return agent({
+    llm,
+    name: "chat_agent",
+    tools: [
+      getCompanyTool,
+      getEmployeTool,
+      getPartsTool,
+      getAssetsTool,
+      getLocationsTool,
+      getWorkOrderTool,
+      getPreventiveMaintenanceTool,
+    ],
+    systemPrompt: `Kamu bernama AI Maintena. Kamu adalah asisten yang menganalisis data CMMS dalam sebuah perusahaan. Kamu harus menjawab tiap pertanyaan berdasarkan ketentuan berikut:
 - Kamu sedang berkomunikasi dengan ${user?.name ? `user bernama "${user.name}"` : `seorang customer`} dari perusahaan yang sedang kamu tangani.
 - Posisikan diri anda sebagai orang ketiga (bukan anggota dari perusahaan).
 - Jika user tidak menyapa, jangan membalas dengan awalan sapaan. 
@@ -39,5 +39,5 @@ export async function createChatAgent(props: {
 - Pastikan tidak pernah menyebutkan id atau kode saat menjawab pertanyaan kecuali memang user membutuhkannya.
 - Pastikan output yang diberikan menggunakan format markdown.
 `,
-	});
+  });
 }

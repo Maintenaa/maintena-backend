@@ -4,22 +4,25 @@ import { createChatSchema } from "./chat.schema";
 import { createChat } from "./chat.service";
 
 export function createChatRoute() {
-	return new Elysia({
-		prefix: "/chat",
-		tags: ["Chat"],
-	}).use(
-		CompanyMiddleware().post(
-			"/",
-			({ company, body, user }) => {
-				return createChat({
-					company_id: company.id,
-					message: body.message,
-					user,
-				});
-			},
-			{
-				body: createChatSchema,
-			},
-		),
-	);
+  return new Elysia({
+    prefix: "/chat",
+    tags: ["Chat"],
+  }).use(
+    CompanyMiddleware().post(
+      "/",
+      ({ company, body, user }) => {
+        return createChat({
+          company_id: company.id,
+          message: body.message,
+          user,
+        });
+      },
+      {
+        body: createChatSchema,
+        detail: {
+          summary: "Chat - Chat With AI",
+        },
+      }
+    )
+  );
 }

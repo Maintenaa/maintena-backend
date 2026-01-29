@@ -4,9 +4,9 @@ import { Config } from "../core";
 
 import cors from "@elysiajs/cors";
 import {
-	CommonMiddleware,
-	ErrorMiddleware,
-	LoggerMiddleware,
+  CommonMiddleware,
+  ErrorMiddleware,
+  LoggerMiddleware,
 } from "../modules/common/common.middleware";
 
 import createCheckHealthRoute from "../modules/check-health/check-health.route";
@@ -23,56 +23,56 @@ import { createChatRoute } from "../modules/chat/chat.route";
 import { SecurityScheme } from "../constant";
 
 export default function buildElysiaServer() {
-	return (
-		new Elysia()
-			// integrations
-			.use(cors({ origin: Config.CLIENT_URL.split(",") }))
-			.use(
-				openapi({
-					references: fromTypes(),
-					path: "/docs",
-					documentation: {
-						info: {
-							title: "Maintena API",
-							description: "Maintena API Documentation",
-							version: "1.0.0",
-						},
-						components: {
-							securitySchemes: {
-								[SecurityScheme.BearerAuth]: {
-									type: "http",
-									scheme: "bearer",
-								},
-								[SecurityScheme.CompanyAuth]: {
-									type: "apiKey",
-									in: "header",
-									name: "Company-Code",
-								},
-							},
-						},
-					},
-				}),
-			)
+  return (
+    new Elysia()
+      // integrations
+      .use(cors({ origin: Config.CLIENT_URL.split(",") }))
+      .use(
+        openapi({
+          references: fromTypes(),
+          path: "/docs",
+          documentation: {
+            info: {
+              title: "Maintena API",
+              description: "Maintena API Documentation",
+              version: "1.0.0",
+            },
+            components: {
+              securitySchemes: {
+                [SecurityScheme.BearerAuth]: {
+                  type: "http",
+                  scheme: "bearer",
+                },
+                [SecurityScheme.CompanyAuth]: {
+                  type: "apiKey",
+                  in: "header",
+                  name: "Company-Code",
+                },
+              },
+            },
+          },
+        })
+      )
 
-			// middleware
-			.use(CommonMiddleware())
-			.use(LoggerMiddleware())
-			.use(ErrorMiddleware())
+      // middleware
+      .use(CommonMiddleware())
+      .use(LoggerMiddleware())
+      .use(ErrorMiddleware())
 
-			// routes
-			.use(createCheckHealthRoute())
-			.use(createAuthRoute())
-			.use(createProfileRoute())
-			.use(createCompanyRoute())
-			.use(createEmployeeRoute())
-			.use(createLocationRoute())
-			.use(createAssetRoute())
-			.use(createPartRoute())
-			.use(createPreventiveMaintenanceRoute())
-			.use(createWorkOrderRoute())
-			.use(createChatRoute())
+      // routes
+      .use(createCheckHealthRoute())
+      .use(createAuthRoute())
+      .use(createProfileRoute())
+      .use(createCompanyRoute())
+      .use(createEmployeeRoute())
+      .use(createLocationRoute())
+      .use(createAssetRoute())
+      .use(createPartRoute())
+      .use(createPreventiveMaintenanceRoute())
+      .use(createWorkOrderRoute())
+      .use(createChatRoute())
 
-			// run server
-			.listen(Config.APP_PORT)
-	);
+      // run server
+      .listen(Config.APP_PORT)
+  );
 }
